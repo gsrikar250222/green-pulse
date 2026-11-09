@@ -135,7 +135,14 @@ app.include_router(weather_router,   prefix=API)
 app.include_router(admin_router,     prefix=API)
 
 
-# ── Health & Diagnostics ─────────────────────────────
+# ── Health, Favicon & Diagnostics ────────────────────
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return Response(
+        content='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🌱</text></svg>'.encode("utf-8"),
+        media_type="image/svg+xml"
+    )
 
 @app.get("/api", tags=["Health"])
 @app.get("/api/info", tags=["Health"])
@@ -551,9 +558,22 @@ Healthy soil must contain at least 0.75% Organic Carbon. Most agricultural soils
         print("💬  Default farmer testimonials seeded")
 
 
-# ── Mount Frontend Static Assets (Unified Local Serving) ───────────────────
-frontend_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend")
-if os.path.exists(frontend_dir):
+# ── Frontend & Root Route Handling ─────────────────────────────────────────
+
+def _resolve_frontend_dir():
+    candidates = [
+        os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "frontend"),
+        os.path.join(os.getcwd(), "frontend"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "frontend"),
+    ]
+    for c in candidates:
+        if os.path.exists(c) and os.path.isfile(os.path.join(c, "index.html")):
+            return c
+    return None
+
+frontend_dir = _resolve_frontend_dir()
+
+if frontend_dir:
     from fastapi.staticfiles import StaticFiles
     from fastapi.responses import FileResponse
 
@@ -574,6 +594,24 @@ if os.path.exists(frontend_dir):
         return FileResponse(os.path.join(frontend_dir, "admin.html"))
 
     app.mount("/", StaticFiles(directory=frontend_dir, html=True), name="frontend")
+else:
+    @app.get("/", include_in_schema=False)
+    async def root_api():
+        return {
+            "status": "online",
+            "app": "GreenPulse Agriculture API",
+            "version": "2.0.0",
+            "message": "Welcome to GreenPulse API. The interactive Swagger documentation is available at /api/docs",
+            "docs": "/api/docs",
+            "endpoints": {
+                "products": "/api/v1/products",
+                "services": "/api/v1/services",
+                "partners": "/api/v1/partners",
+                "knowledge": "/api/v1/knowledge",
+                "weather": "/api/v1/weather",
+                "health": "/health"
+            }
+        }
 
 
 if __name__ == "__main__":
