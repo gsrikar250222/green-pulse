@@ -1,0 +1,5095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GreenPulse – Agriculture Platform</title>
+<meta name="description" content="GreenPulse connects farmers with agriculture brands, products, services, and expert knowledge resources.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<!-- Swiper 11 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+<!-- PhotoSwipe 5 CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/photoswipe.css">
+<style>
+  :root {
+    /* Natural Ivory & Organic Editorial Palette */
+    --ivory-base: #FAF8F4;
+    --ivory-surface: #FFFFFF;
+    --ivory-card: #F4EFE6;
+    --ivory-card-hover: #EFE8DC;
+    --ivory-border: rgba(30, 66, 42, 0.08);
+    --ivory-subtle: #F6F3EB;
+
+    /* Deep Forest & Emerald Tones */
+    --forest-950: #061509;
+    --forest-900: #0B2212;
+    --forest-800: #12331C;
+    --forest-700: #1B4527;
+    --green-dark: #12331C;
+    --green-deep: #0B2212;
+    --green-mid: #245E36;
+    --green-bright: #2D8A4E;
+    --green-accent: #34D399;
+    --green-light: #52B788;
+    --green-soft: #E8F5E9;
+
+    /* Harvest Gold & Warm Accents */
+    --yellow: #F5C518;
+    --yellow-warm: #E29578;
+    --yellow-pale: #FEF9E7;
+    --gold-accent: #D4A373;
+    --gold-warm: #E29578;
+    --gold-bright: #F5C518;
+
+    /* Text & Neutral Colors */
+    --white: #FFFFFF;
+    --off-white: #FAF8F4;
+    --gray-light: #F4EFE6;
+    --gray-text: #6C8272;
+    --dark-text: #15261A;
+    --dark-muted: #4B6352;
+
+    /* Typography */
+    --font-display: 'Playfair Display', Georgia, serif;
+    --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-serif: 'Playfair Display', Georgia, serif;
+
+    /* Shadows & Elevation */
+    --shadow-sm: 0 2px 10px rgba(11, 34, 18, 0.05);
+    --shadow-md: 0 8px 30px rgba(11, 34, 18, 0.08);
+    --shadow-lg: 0 18px 50px rgba(11, 34, 18, 0.15);
+    --shadow-card: 0 10px 28px -4px rgba(11, 34, 18, 0.07);
+    --shadow-hover: 0 22px 48px -8px rgba(11, 34, 18, 0.16);
+
+    /* Radii & Timing */
+    --radius: 16px;
+    --radius-sm: 8px;
+    --radius-pill: 999px;
+    --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--dark-text);
+    background: var(--white);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ─── NAVBAR ─── */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 72px;
+    background: rgba(15, 42, 15, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    transition: all 0.3s ease;
+  }
+
+  .navbar.scrolled {
+    background: rgba(10, 28, 10, 0.98);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.3);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+  }
+
+  .logo-icon {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--green-light), var(--yellow));
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+
+  .logo-text {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: -0.3px;
+  }
+
+  .logo-text span { color: var(--yellow); }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: var(--radius-pill);
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  .nav-links a.active,
+  .nav-links a:hover { color: var(--yellow); }
+
+  .nav-links .dropdown {
+    display: flex; align-items: center; gap: 4px;
+  }
+
+  .nav-cta {
+    background: var(--green-light);
+    color: var(--white) !important;
+    padding: 10px 22px !important;
+    border-radius: var(--radius-pill) !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.25s !important;
+  }
+
+  .nav-cta:hover {
+    background: var(--green-bright) !important;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(108,198,68,0.35) !important;
+  }
+
+  .nav-cta .dot {
+    width: 8px; height: 8px;
+    background: var(--yellow);
+    border-radius: 50%;
+    animation: pulse-dot 1.5s infinite;
+  }
+
+  @keyframes pulse-dot {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.3); opacity: 0.7; }
+  }
+
+  /* ─── HERO CAROUSEL (JioHotstar style) ─── */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 680px;
+    overflow: hidden;
+    background: #050e05;
+  }
+
+  /* Track holds all slides side by side */
+  .hero-track {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.75s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+
+  /* Each slide */
+  .hero-slide {
+    position: relative;
+    min-width: 100%;
+    height: 100%;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .hero-slide-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.08);
+    transition: transform 8s ease-out;
+  }
+
+  .hero-slide.active .hero-slide-bg {
+    transform: scale(1.0);
+  }
+
+  /* Dark gradient overlay — left heavy like JioHotstar */
+  .hero-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to right, rgba(5,14,5,0.92) 0%, rgba(5,14,5,0.55) 55%, rgba(5,14,5,0.10) 100%),
+      linear-gradient(to top, rgba(5,14,5,0.85) 0%, transparent 50%);
+    z-index: 1;
+  }
+
+  /* Content inside each slide */
+  .hero-slide-content {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    z-index: 2;
+    padding: 0 60px 100px;
+    max-width: 680px;
+  }
+
+  .slide-category-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(108,198,68,0.5);
+    color: var(--green-light);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  }
+
+  .slide-category-tag::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--green-light);
+    border-radius: 50%;
+    animation: pulse-dot 1.5s infinite;
+  }
+
+  .hero-slide.active .slide-category-tag {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .slide-title {
+    font-family: var(--font-display);
+    font-size: clamp(38px, 5.5vw, 70px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.05;
+    margin-bottom: 14px;
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.55s ease 0.35s, transform 0.55s ease 0.35s;
+  }
+
+  .slide-title em {
+    font-style: normal;
+    color: var(--yellow);
+  }
+
+  .hero-slide.active .slide-title {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .slide-sub {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--yellow);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 6px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+  }
+
+  .hero-slide.active .slide-sub { opacity: 1; transform: translateY(0); }
+
+  .slide-desc {
+    color: rgba(255,255,255,0.7);
+    font-size: 15px;
+    line-height: 1.7;
+    max-width: 420px;
+    margin-bottom: 32px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease 0.5s, transform 0.55s ease 0.5s;
+  }
+
+  .hero-slide.active .slide-desc {
+    opacity: 1; transform: translateY(0);
+  }
+
+  .slide-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.55s ease 0.65s, transform 0.55s ease 0.65s;
+  }
+
+  .hero-slide.active .slide-actions {
+    opacity: 1; transform: translateY(0);
+  }
+
+  /* ── Carousel thumbnail strip (JioHotstar "peek" cards) ── */
+  .hero-cards-strip {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 42%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    padding-right: 40px;
+    pointer-events: none;
+  }
+
+  /* ── Dot / progress indicators ── */
+  .hero-dots {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .hero-dot {
+    width: 8px; height: 8px;
+    border-radius: var(--radius-pill);
+    background: rgba(255,255,255,0.3);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s ease;
+  }
+
+  .hero-dot.active {
+    width: 32px;
+    background: var(--green-light);
+  }
+
+  /* ── Arrow buttons ── */
+  .hero-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: var(--white);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.2s;
+  }
+
+  .hero-arrow:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    transform: translateY(-50%) scale(1.08);
+  }
+
+  .hero-arrow.prev { left: 20px; }
+  .hero-arrow.next { right: 20px; }
+
+  /* ── Progress bar at top ── */
+  .hero-progress {
+    position: absolute;
+    top: 72px; left: 0; right: 0;
+    z-index: 10;
+    display: flex;
+    gap: 6px;
+    padding: 16px 60px 0;
+  }
+
+  .progress-bar {
+    flex: 1;
+    height: 3px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .progress-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--green-light);
+    border-radius: 3px;
+    transition: width linear;
+  }
+
+  .progress-bar.done .progress-bar-fill { width: 100%; }
+  .progress-bar.active .progress-bar-fill { width: 100%; }
+
+  /* legacy hero-badge / hero-particles not needed but keep placeholders */
+  .hero-bg, .hero-particles, .hero-content { display: none; }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--green-light);
+    color: var(--white);
+    font-weight: 700;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    box-shadow: 0 8px 24px rgba(108,198,68,0.4);
+  }
+
+  .btn-primary:hover {
+    background: var(--green-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(108,198,68,0.5);
+  }
+
+  .btn-primary .btn-icon {
+    width: 26px; height: 26px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    transition: transform 0.2s;
+  }
+
+  .btn-primary:hover .btn-icon { transform: rotate(45deg); }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(255,255,255,0.3);
+    color: var(--white);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.25s;
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-outline:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.5);
+    transform: translateY(-2px);
+  }
+
+  .btn-outline .btn-icon {
+    width: 26px; height: 26px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+  }
+
+  /* ─── STATS YELLOW BAND ─── */
+  .stats-band {
+    background: var(--yellow);
+    padding: 40px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stats-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .stats-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+    position: relative;
+  }
+
+  .stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stat-avatars {
+    display: flex;
+  }
+
+  .stat-avatars img, .stat-avatars .avatar-placeholder {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2.5px solid var(--yellow);
+    margin-left: -12px;
+    object-fit: cover;
+    background: var(--green-mid);
+  }
+
+  .stat-avatars .avatar-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+
+  .stat-avatars :first-child { margin-left: 0; }
+
+  .stat-text strong {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--dark-text);
+    line-height: 1.1;
+  }
+
+  .stat-text span {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(26,46,26,0.65);
+  }
+
+  .stat-divider {
+    width: 1px;
+    height: 60px;
+    background: rgba(26,46,26,0.15);
+    flex-shrink: 0;
+  }
+
+  .stat-circle {
+    width: 80px; height: 80px;
+    border-radius: 50%;
+    background: var(--green-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    border: 3px solid rgba(255,255,255,0.2);
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .stat-circle::before {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border-radius: 50%;
+    border: 2px dashed rgba(26,46,26,0.2);
+    animation: spin 15s linear infinite;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .stat-circle-text {
+    font-size: 8px;
+    font-weight: 700;
+    color: var(--yellow);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    line-height: 1.3;
+    text-align: center;
+    padding: 0 6px;
+  }
+
+  .stat-arrow-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .stat-arrow-icon {
+    width: 48px; height: 48px;
+    background: var(--green-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--yellow);
+    flex-shrink: 0;
+  }
+
+  .stat-video-thumb {
+    width: 90px; height: 60px;
+    border-radius: 10px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-video-thumb img {
+    width: 100%; height: 100%; object-fit: cover; border-radius: 10px;
+  }
+
+  .play-btn {
+    position: absolute;
+    width: 28px; height: 28px;
+    background: var(--yellow);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: var(--dark-text);
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .play-btn:hover { transform: scale(1.1); }
+
+  /* ─── SECTION LABELS ─── */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(108,198,68,0.1);
+    border: 1px solid rgba(108,198,68,0.25);
+    color: var(--green-bright);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 12px;
+  }
+
+  .section-label::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--green-light);
+    border-radius: 50%;
+  }
+
+  /* ─── SERVICES ─── */
+  .services-section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  .section-title-block { flex: 1; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(30px, 4vw, 46px);
+    font-weight: 800;
+    color: var(--dark-text);
+    line-height: 1.15;
+    max-width: 480px;
+  }
+
+  .section-nav {
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav-arrow {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 2px solid var(--green-mid);
+    background: transparent;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    color: var(--green-mid);
+    transition: all 0.2s;
+  }
+
+  .nav-arrow:hover, .nav-arrow.active {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    color: var(--white);
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .service-card {
+    border-radius: var(--radius);
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    group: true;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .service-card-img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .service-card:hover .service-card-img { transform: scale(1.06); }
+
+  .service-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,28,10,0.9) 0%, transparent 50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 24px;
+  }
+
+  .service-tag {
+    display: inline-flex;
+    align-items: center;
+    background: var(--yellow);
+    color: var(--dark-text);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 8px;
+    align-self: flex-start;
+    letter-spacing: 0.3px;
+  }
+
+  .service-card h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .service-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    line-height: 1.5;
+  }
+
+  /* ─── ABOUT / FEATURES ─── */
+  .about-section {
+    background: var(--green-deep);
+    padding: 100px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-section::before {
+    content: '';
+    position: absolute;
+    top: -100px; right: -100px;
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(108,198,68,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-left { position: relative; }
+
+  .about-img-main {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-dark));
+  }
+
+  .about-img-badge {
+    position: absolute;
+    bottom: 24px;
+    right: -20px;
+    background: var(--yellow);
+    border-radius: 16px;
+    padding: 16px 20px;
+    box-shadow: var(--shadow-md);
+  }
+
+  .about-img-badge strong {
+    display: block;
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--dark-text);
+    line-height: 1;
+  }
+
+  .about-img-badge span {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(26,46,26,0.7);
+    max-width: 90px;
+    display: block;
+    line-height: 1.4;
+    margin-top: 4px;
+  }
+
+  .about-right .section-label { margin-bottom: 16px; }
+
+  .about-right .section-title {
+    color: var(--white);
+    margin-bottom: 20px;
+  }
+
+  .about-desc {
+    color: rgba(255,255,255,0.65);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+
+  .features-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgba(255,255,255,0.8);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .feature-item::before {
+    content: '✓';
+    width: 22px; height: 22px;
+    background: var(--green-light);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px;
+    color: var(--white);
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  /* ─── PRODUCTS ─── */
+  .products-section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .products-section .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .products-section .section-header-row {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .categories-filter {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .cat-btn {
+    padding: 8px 20px;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid #dde8d9;
+    background: transparent;
+    color: var(--gray-text);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: var(--font-body);
+  }
+
+  .cat-btn:hover, .cat-btn.active {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    color: var(--white);
+  }
+
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 24px;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1.5px solid #edf2ea;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .product-card:hover {
+    border-color: var(--green-light);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(61,139,55,0.12);
+  }
+
+  .product-img-wrap {
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+    background: var(--gray-light);
+  }
+
+  .product-img-wrap img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .product-card:hover .product-img-wrap img { transform: scale(1.08); }
+
+  .product-badge {
+    position: absolute;
+    top: 12px; left: 12px;
+    background: var(--green-light);
+    color: var(--white);
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .product-badge.new { background: var(--yellow); color: var(--dark-text); }
+
+  .product-info {
+    padding: 16px;
+  }
+
+  .product-cat {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green-bright);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 4px;
+  }
+
+  .product-info h4 {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .product-info p {
+    font-size: 12px;
+    color: var(--gray-text);
+    line-height: 1.5;
+    margin-bottom: 14px;
+  }
+
+  .product-footer {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-wa {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: #25d366;
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-wa:hover { background: #1db954; transform: translateY(-1px); }
+
+  .btn-inquiry {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: var(--gray-light);
+    color: var(--dark-text);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    justify-content: center;
+  }
+
+  .btn-inquiry:hover {
+    background: var(--green-light);
+    color: var(--white);
+  }
+
+  /* ─── KNOWLEDGE / BLOG ─── */
+  .knowledge-section {
+    background: var(--off-white);
+    padding: 100px 48px;
+  }
+
+  .knowledge-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .article-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1.5px solid #edf2ea;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--green-light);
+  }
+
+  .article-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    display: block;
+  }
+
+  .article-card.featured .article-img { height: 260px; }
+
+  .article-body { padding: 20px; }
+
+  .article-tag {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(108,198,68,0.1);
+    color: var(--green-bright);
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: var(--radius-pill);
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .article-body h3 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--dark-text);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+
+  .article-card.featured .article-body h3 { font-size: 24px; }
+
+  .article-body p {
+    font-size: 13px;
+    color: var(--gray-text);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    color: #aab8aa;
+  }
+
+  .article-meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* ─── WEATHER ─── */
+  .weather-section {
+    background: var(--green-deep);
+    padding: 80px 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .weather-section::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .weather-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .weather-inner .section-label { background: rgba(245,197,24,0.15); border-color: rgba(245,197,24,0.3); color: var(--yellow); }
+  .weather-inner .section-label::before { background: var(--yellow); }
+
+  .weather-inner .section-title { color: var(--white); }
+
+  .weather-grid {
+    display: grid;
+    grid-template-columns: 1.4fr repeat(4, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .weather-main-card {
+    background: linear-gradient(145deg, rgba(108,198,68,0.15), rgba(61,139,55,0.1));
+    border: 1px solid rgba(108,198,68,0.2);
+    border-radius: 20px;
+    padding: 32px;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .weather-main-card::before {
+    content: '☀';
+    position: absolute;
+    right: 20px; top: 20px;
+    font-size: 64px;
+    opacity: 0.2;
+  }
+
+  .weather-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 20px;
+  }
+
+  .weather-temp {
+    font-family: var(--font-display);
+    font-size: 72px;
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .weather-temp sup { font-size: 28px; vertical-align: super; }
+
+  .weather-desc {
+    font-size: 16px;
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 24px;
+  }
+
+  .weather-stats {
+    display: flex;
+    gap: 20px;
+  }
+
+  .weather-stat {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .weather-stat strong {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .weather-day-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    color: var(--white);
+    transition: all 0.25s;
+    cursor: pointer;
+  }
+
+  .weather-day-card:hover, .weather-day-card.today {
+    background: rgba(108,198,68,0.15);
+    border-color: rgba(108,198,68,0.3);
+  }
+
+  .weather-day { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.6); margin-bottom: 12px; }
+  .weather-icon { font-size: 32px; margin-bottom: 12px; }
+  .weather-day-temp { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+  .weather-day-low { font-size: 12px; color: rgba(255,255,255,0.5); }
+  .weather-rain { font-size: 11px; color: #64b8f5; margin-top: 8px; font-weight: 600; }
+
+  /* ─── TESTIMONIALS ─── */
+  .testimonials-section {
+    padding: 100px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .testimonial-card {
+    background: var(--white);
+    border: 1.5px solid #edf2ea;
+    border-radius: var(--radius);
+    padding: 28px;
+    transition: all 0.3s;
+    cursor: pointer;
+  }
+
+  .testimonial-card:hover {
+    border-color: var(--green-light);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+  }
+
+  .star { color: var(--yellow); font-size: 16px; }
+
+  .testimonial-text {
+    font-size: 15px;
+    color: var(--gray-text);
+    line-height: 1.7;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .author-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .author-info h5 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dark-text);
+  }
+
+  .author-info span {
+    font-size: 12px;
+    color: var(--gray-text);
+  }
+
+  /* ─── PARTNERS ─── */
+  .partners-section {
+    background: var(--green-deep);
+    padding: 80px 48px;
+  }
+
+  .partners-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .partners-inner .section-title { color: var(--white); }
+
+  .partners-logos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-top: 48px;
+    flex-wrap: wrap;
+  }
+
+  .partner-logo {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    padding: 20px 32px;
+    color: rgba(255,255,255,0.45);
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    transition: all 0.3s;
+    cursor: pointer;
+    flex: 1;
+    text-align: center;
+    min-width: 140px;
+  }
+
+  .partner-logo:hover {
+    background: rgba(108,198,68,0.1);
+    border-color: rgba(108,198,68,0.3);
+    color: var(--white);
+  }
+
+  /* ─── CONTACT ─── */
+  .contact-section {
+    background: var(--off-white);
+    padding: 100px 48px;
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .contact-info .section-title {
+    margin-bottom: 20px;
+  }
+
+  .contact-desc {
+    font-size: 15px;
+    color: var(--gray-text);
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--dark-text);
+  }
+
+  .contact-icon {
+    width: 44px; height: 44px;
+    background: rgba(108,198,68,0.1);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .contact-form {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px;
+    box-shadow: var(--shadow-md);
+    border: 1.5px solid #edf2ea;
+  }
+
+  .contact-form h3 {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--dark-text);
+    margin-bottom: 24px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--dark-text);
+    margin-bottom: 6px;
+  }
+
+  .form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid #dde8d9;
+    border-radius: 10px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--dark-text);
+    background: var(--white);
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+  }
+
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    border-color: var(--green-light);
+    box-shadow: 0 0 0 3px rgba(108,198,68,0.1);
+  }
+
+  .form-group textarea { height: 100px; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--dark-text);
+    padding: 80px 48px 32px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand .logo-text { color: var(--white); font-size: 28px; }
+  .footer-brand .logo-text span { color: var(--yellow); }
+
+  .footer-tagline {
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 16px 0 24px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .footer-socials {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-btn {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.07);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.6);
+    transition: all 0.2s;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .social-btn:hover {
+    background: var(--green-light);
+    color: var(--white);
+    border-color: var(--green-light);
+  }
+
+  .footer-col h5 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 14px;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--green-light); }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-bottom a { color: var(--green-light); text-decoration: none; }
+
+  /* ─── WHATSAPP FLOAT ─── */
+  .wa-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+  }
+
+  .wa-tooltip {
+    background: var(--dark-text);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 8px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: all 0.2s;
+    pointer-events: none;
+  }
+
+  .wa-float:hover .wa-tooltip {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .wa-btn {
+    width: 60px; height: 60px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 28px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(37,211,102,0.45);
+    transition: all 0.25s;
+    text-decoration: none;
+    animation: wa-pulse 2.5s infinite;
+  }
+
+  .wa-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 32px rgba(37,211,102,0.55);
+  }
+
+  @keyframes wa-pulse {
+    0%, 100% { box-shadow: 0 8px 24px rgba(37,211,102,0.45); }
+    50% { box-shadow: 0 8px 32px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+  }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .navbar { padding: 0 24px; }
+    .hero-content { padding: 0 24px; padding-top: 72px; }
+    .services-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .articles-grid { grid-template-columns: 1fr 1fr; }
+    .articles-grid .article-card:nth-child(1) { grid-column: span 2; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .weather-grid { grid-template-columns: 1fr 1fr; }
+    .weather-main-card { grid-column: span 2; }
+  }
+
+  @media (max-width: 768px) {
+    .navbar { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero h1 { font-size: 36px; }
+    .stats-band { padding: 28px 20px; }
+    .stats-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .stat-divider { display: none; }
+    .services-section, .products-section, .testimonials-section { padding: 60px 20px; }
+    .knowledge-section, .contact-section { padding: 60px 20px; }
+    .about-section, .weather-section, .partners-section { padding: 60px 20px; }
+    .services-grid, .testimonials-grid, .products-grid { grid-template-columns: 1fr; }
+    .articles-grid { grid-template-columns: 1fr; }
+    .articles-grid .article-card:nth-child(1) { grid-column: span 1; }
+    .weather-grid { grid-template-columns: 1fr 1fr; }
+    .weather-main-card { grid-column: span 2; }
+    .footer { padding: 60px 20px 24px; }
+    .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  /* ─── PARTNER CARDS WITH IMAGES ─── */
+  .partner-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 48px;
+  }
+
+  .partner-card-visual {
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    transition: all 0.35s ease;
+    cursor: pointer;
+  }
+
+  .partner-card-visual:hover {
+    transform: translateY(-6px);
+    border-color: rgba(108,198,68,0.35);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  }
+
+  .partner-card-visual img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    filter: brightness(0.75) saturate(1.2);
+  }
+
+  .partner-card-visual:hover img {
+    transform: scale(1.06);
+    filter: brightness(0.9) saturate(1.3);
+  }
+
+  .partner-card-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .partner-card-icon { font-size: 22px; margin-bottom: 2px; }
+
+  .partner-card-body h4 {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .partner-card-body p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+  }
+
+  /* ─── PHOTO GALLERY ─── */
+  .gallery-section {
+    background: var(--off-white);
+    padding: 100px 48px;
+  }
+
+  .gallery-inner { max-width: 1300px; margin: 0 auto; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 240px;
+    gap: 14px;
+  }
+
+  .gallery-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--gray-light);
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.55s ease, filter 0.3s ease;
+    filter: brightness(0.92) saturate(1.1);
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.07);
+    filter: brightness(1.0) saturate(1.25);
+  }
+
+  .gallery-item.tall  { grid-row: span 2; }
+  .gallery-item.wide  { grid-column: span 2; }
+  .gallery-item.panorama { grid-column: span 3; grid-row: span 1; height: 260px; }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,28,10,0.75) 0%, transparent 50%);
+    display: flex;
+    align-items: flex-end;
+    padding: 18px 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-overlay span {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.3px;
+    background: rgba(108,198,68,0.85);
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+
+  /* ─── ABOUT IMAGE COLLAGE ─── */
+  .about-img-collage {
+    position: relative;
+    width: 100%;
+  }
+
+  .about-img-main {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 20px;
+    display: block;
+    filter: brightness(0.95) saturate(1.15);
+  }
+
+  .about-img-secondary {
+    position: absolute;
+    bottom: -28px;
+    right: -24px;
+    width: 200px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 4px solid var(--green-deep);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+    filter: brightness(0.95) saturate(1.2);
+  }
+
+  /* ─── 6-SERVICE GRID ─── */
+  .services-grid-6 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  /* ─── 8-PRODUCT GRID ─── */
+  .products-grid-8 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  /* ─── 5-ARTICLE GRID (featured left tall, 4 right in 2x2) ─── */
+  .articles-grid-rich {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .articles-grid-rich .article-card.featured {
+    grid-row: span 2;
+  }
+
+  .articles-grid-rich .article-card.featured .article-img { height: 320px; }
+  .articles-grid-rich .article-card .article-img { height: 170px; }
+
+  /* ─── CINEMATIC CTA BANNER ─── */
+  .cta-banner {
+    position: relative;
+    padding: 120px 48px;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .cta-banner-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transform: scale(1.04);
+  }
+
+  .cta-banner-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(5,14,5,0.88) 0%, rgba(15,42,15,0.82) 100%);
+  }
+
+  .cta-banner-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cta-banner-content h2 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 60px);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.1;
+    margin: 16px 0 20px;
+  }
+
+  .cta-banner-content p {
+    color: rgba(255,255,255,0.72);
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 36px;
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-banner-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .cta-stats-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 20px 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .cta-stat {
+    text-align: center;
+    padding: 0 28px;
+  }
+
+  .cta-stat strong {
+    display: block;
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .cta-stat span {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+    display: block;
+    font-weight: 500;
+  }
+
+  .cta-stat-div {
+    width: 1px;
+    height: 40px;
+    background: rgba(255,255,255,0.12);
+    flex-shrink: 0;
+  }
+
+  /* ─── TESTIMONIAL PHOTO AVATARS ─── */
+  .author-avatar-img {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--green-light);
+    flex-shrink: 0;
+  }
+
+  /* responsive additions */
+  @media (max-width: 1024px) {
+    .services-grid-6 { grid-template-columns: repeat(2, 1fr); }
+    .products-grid-8 { grid-template-columns: repeat(2, 1fr); }
+    .articles-grid-rich { grid-template-columns: 1fr 1fr; }
+    .articles-grid-rich .article-card.featured { grid-column: span 2; grid-row: span 1; }
+    .articles-grid-rich .article-card.featured .article-img { height: 260px; }
+  }
+
+  @media (max-width: 700px) {
+    .services-grid-6 { grid-template-columns: 1fr; }
+    .products-grid-8 { grid-template-columns: 1fr 1fr; }
+    .articles-grid-rich { grid-template-columns: 1fr; }
+    .articles-grid-rich .article-card.featured { grid-column: span 1; }
+    .cta-banner { padding: 80px 20px; }
+    .cta-stats-row { padding: 16px 12px; gap: 4px; }
+    .cta-stat { padding: 0 12px; }
+    .cta-stat strong { font-size: 20px; }
+  }
+
+  /* ─── FULL-STACK EXPANSIONS & DYNAMIC UI ─── */
+  .nav-right-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .lang-toggle-btn {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.22);
+    color: #fff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .lang-toggle-btn:hover {
+    background: var(--green-light);
+    border-color: var(--green-light);
+    color: #0f2a0f;
+  }
+
+  .farmer-auth-btn {
+    background: var(--yellow);
+    color: #0f2a0f;
+    border: none;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+  }
+  .farmer-auth-btn:hover {
+    background: var(--yellow-warm);
+    transform: translateY(-1px);
+  }
+
+  .farmer-user-pill {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    padding: 4px 12px 4px 6px;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .farmer-user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--green-light);
+    color: #0f2a0f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 13px;
+  }
+  .farmer-dropdown-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    background: #fff;
+    color: var(--dark-text);
+    border-radius: 12px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+    min-width: 190px;
+    padding: 8px;
+    z-index: 1001;
+    border: 1px solid #e0ebd9;
+  }
+  .farmer-dropdown-menu.open { display: block; }
+  .farmer-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--dark-text);
+    border-radius: 6px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    font-family: var(--font-body);
+  }
+  .farmer-dropdown-item:hover { background: #f0f4ed; color: var(--green-bright); }
+
+  .mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+  }
+
+  /* Mobile Nav Drawer */
+  .mobile-nav-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 1998;
+    backdrop-filter: blur(4px);
+  }
+  .mobile-nav-backdrop.open { display: block; }
+  .mobile-nav-drawer {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100vh;
+    background: var(--green-deep);
+    z-index: 1999;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.3);
+  }
+  .mobile-nav-drawer.open { right: 0; }
+  .mobile-nav-drawer a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  /* Live Product Search Bar */
+  .product-search-bar {
+    max-width: 600px;
+    margin: 0 auto 24px;
+    display: flex;
+    gap: 10px;
+    background: var(--off-white);
+    padding: 6px;
+    border-radius: 999px;
+    border: 1.5px solid #dce8d7;
+  }
+  .product-search-bar input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    padding: 8px 20px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--dark-text);
+  }
+  .product-search-bar button {
+    background: var(--green-bright);
+    color: #fff;
+    border: none;
+    padding: 8px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.2s;
+  }
+  .product-search-bar button:hover { background: var(--green-dark); }
+
+  /* Weather Village Search & Advisories */
+  .weather-search-box {
+    display: flex;
+    gap: 10px;
+    margin: 18px 0 14px;
+    max-width: 540px;
+    width: 100%;
+  }
+  .weather-search-input {
+    flex: 1;
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(255,255,255,0.25);
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    outline: none;
+    backdrop-filter: blur(8px);
+  }
+  .weather-search-input::placeholder { color: rgba(255,255,255,0.6); }
+  .weather-search-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: var(--yellow);
+    color: #0f2a0f;
+    border: none;
+    font-weight: 700;
+    font-family: var(--font-body);
+    font-size: 13px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .weather-search-btn:hover { transform: scale(1.02); }
+
+  .quick-mandals {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 24px;
+  }
+  .mandal-pill {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    color: #fff;
+    padding: 4px 10px;
+    border-radius: 14px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.15s;
+  }
+  .mandal-pill:hover { background: var(--green-light); color: #0f2a0f; border-color: var(--green-light); }
+
+  .agri-advisory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+    width: 100%;
+  }
+  .advisory-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 14px;
+    padding: 18px 20px;
+    backdrop-filter: blur(10px);
+  }
+  .advisory-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .advisory-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--yellow);
+  }
+  .advisory-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+  .advisory-badge.success { background: rgba(76,175,80,0.25); color: #a5d6a7; }
+  .advisory-badge.warning { background: rgba(255,193,7,0.25); color: #ffe082; }
+  .advisory-badge.danger  { background: rgba(244,67,54,0.25); color: #ef9a9a; }
+  .advisory-text { font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.5; }
+  .advisory-text-te { font-size: 12px; color: rgba(255,255,255,0.65); margin-top: 4px; font-style: italic; }
+
+  /* Interactive Modals */
+  .gp-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(6px);
+  }
+  .gp-modal-overlay.open { display: flex; }
+  .gp-modal {
+    background: #fff;
+    border-radius: 20px;
+    width: 600px;
+    max-width: 95vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+    padding: 28px;
+    position: relative;
+    animation: modalScale 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes modalScale {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  .gp-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #e0ebd9;
+    margin-bottom: 20px;
+  }
+  .gp-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--gray-text);
+  }
+
+  /* Toast notification */
+  .gp-toast-container {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 3000;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .gp-toast {
+    padding: 12px 20px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    animation: toastSlide 0.3s ease;
+  }
+  .gp-toast.success { background: var(--green-bright); }
+  .gp-toast.error   { background: #e53935; }
+  @keyframes toastSlide {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @media (max-width: 900px) {
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+    .agri-advisory-grid { grid-template-columns: 1fr; }
+    .navbar { padding: 0 20px; }
+  }
+
+  /* ─── EDITORIAL TYPOGRAPHY & NATURAL GREEN/IVORY PALETTE ENHANCEMENTS ─── */
+  h1, h2, h3, .slide-title, .section-title {
+    font-family: var(--font-serif);
+    letter-spacing: -0.015em;
+  }
+  h2 em, .slide-title em, .section-title em {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--gold-accent);
+  }
+  .section-label {
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+  }
+
+  /* Ivory card backgrounds & smooth hover elevation */
+  .product-card {
+    background: var(--ivory-card) !important;
+    border: 1px solid var(--ivory-border) !important;
+    border-radius: var(--radius) !important;
+    overflow: hidden;
+    transition: var(--transition) !important;
+    box-shadow: var(--shadow-card) !important;
+  }
+  .product-card:hover {
+    transform: translateY(-8px) scale(1.01) !important;
+    box-shadow: var(--shadow-hover) !important;
+    border-color: rgba(45, 138, 78, 0.25) !important;
+  }
+  .product-img-wrap {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    position: relative;
+    background: rgba(30, 66, 42, 0.04);
+  }
+  .product-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .product-card:hover .product-img-wrap img {
+    transform: scale(1.08);
+  }
+
+  /* Service Card aspect-ratio and smooth overlay */
+  .service-card {
+    position: relative;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 16 / 11;
+    cursor: pointer;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+  }
+  .service-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow-hover);
+  }
+  .service-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .service-card:hover .service-card-img {
+    transform: scale(1.08);
+  }
+  .service-card-overlay {
+    background: linear-gradient(180deg, transparent 35%, rgba(6, 21, 9, 0.92) 100%) !important;
+  }
+
+  /* Swiper 11 Carousel Styling */
+  .services-swiper {
+    width: 100%;
+    padding: 10px 4px 44px 4px !important;
+    overflow: hidden !important;
+  }
+  .services-swiper .swiper-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  .services-swiper .swiper-slide {
+    height: auto;
+    flex-shrink: 0;
+  }
+  .swiper-pagination-bullet {
+    background: rgba(255, 255, 255, 0.35) !important;
+    opacity: 1 !important;
+    width: 8px !important;
+    height: 8px !important;
+    transition: all 0.3s ease !important;
+  }
+  .swiper-pagination-bullet-active {
+    background: var(--yellow) !important;
+    width: 24px !important;
+    border-radius: 4px !important;
+  }
+
+  /* PhotoSwipe 5 Custom Styling */
+  .pswp {
+    --pswp-bg: rgba(6, 21, 9, 0.95);
+  }
+  .gallery-item {
+    display: block;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: zoom-in;
+    transition: var(--transition);
+  }
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+  }
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+  .gallery-overlay small {
+    display: block;
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-weight: 500;
+  }
+
+  /* Reduced Motion Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hero-slide-bg { transform: none !important; }
+    .product-card:hover, .service-card:hover, .gallery-item:hover { transform: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOAST CONTAINER -->
+<div class="gp-toast-container" id="gpToastContainer"></div>
+
+<!-- MOBILE NAV BACKDROP & DRAWER -->
+<div class="mobile-nav-backdrop" id="mobileNavBackdrop" onclick="toggleMobileNav()"></div>
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
+    <div style="font-weight:700;color:#fff;font-size:18px;">🌿 GreenPulse</div>
+    <button onclick="toggleMobileNav()" style="background:none;border:none;color:#fff;font-size:22px;cursor:pointer;">✕</button>
+  </div>
+  <a href="#home" onclick="toggleMobileNav()" data-i18n="nav_home">Home</a>
+  <a href="#about" onclick="toggleMobileNav()" data-i18n="nav_about">About Us</a>
+  <a href="#services" onclick="toggleMobileNav()" data-i18n="nav_services">Services</a>
+  <a href="#products" onclick="toggleMobileNav()" data-i18n="nav_products">Products</a>
+  <a href="#knowledge" onclick="toggleMobileNav()" data-i18n="nav_knowledge">Knowledge Center</a>
+  <a href="#weather" onclick="toggleMobileNav()" data-i18n="nav_weather">Weather Intelligence</a>
+  <a href="#contact" onclick="toggleMobileNav()" data-i18n="nav_contact">Contact Us</a>
+  <a href="admin.html" target="_blank" style="color:var(--yellow);font-weight:700;">🔐 Admin Dashboard</a>
+  <div style="margin-top:auto;">
+    <button class="farmer-auth-btn" style="width:100%;justify-content:center;" onclick="toggleMobileNav(); openFarmerAuth('register')">
+      <span>👨‍🌾</span> <span data-i18n="nav_farmer_register">Farmer Registration</span>
+    </button>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="logo">
+    <div class="logo-icon">🌿</div>
+    <span class="logo-text">Green<span>Pulse</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#" class="active" data-i18n="nav_home">Home</a></li>
+    <li><a href="#about" data-i18n="nav_about">About Us</a></li>
+    <li><a href="#services" data-i18n="nav_services">Services</a></li>
+    <li><a href="#products" data-i18n="nav_products">Products</a></li>
+    <li><a href="#knowledge" data-i18n="nav_knowledge">Knowledge</a></li>
+    <li><a href="#weather" data-i18n="nav_weather">Weather</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  
+  <div class="nav-right-actions">
+    <!-- Language Toggle Switcher -->
+    <button class="lang-toggle-btn" id="langToggleBtn" onclick="toggleLanguage()" title="Switch Language">
+      🌐 <span id="currentLangLabel">తెలుగు</span>
+    </button>
+
+    <!-- Farmer Auth State Container -->
+    <div id="farmerNavContainer">
+      <button class="farmer-auth-btn" onclick="openFarmerAuth('login')">
+        <span>👨‍🌾</span> <span data-i18n="nav_farmer_login">Farmer Login</span>
+      </button>
+    </div>
+
+    <!-- Mobile Hamburger Toggle Button -->
+    <button class="mobile-menu-btn" onclick="toggleMobileNav()" aria-label="Toggle navigation">☰</button>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<section class="hero" id="home">
+
+  <!-- Progress bars (like Instagram stories / JioHotstar) -->
+  <div class="hero-progress" id="heroProgress"></div>
+
+  <!-- Sliding track -->
+  <div class="hero-track" id="heroTrack">
+
+    <!-- SLIDE 1 -->
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=2400&q=85')"></div>
+      <div class="hero-slide-content">
+        <div class="slide-sub">🌾 Season 2026 · Kharif Special</div>
+        <div class="slide-category-tag">Natural Indian Agriculture</div>
+        <h2 class="slide-title">Organic <em>Farming</em><br>&amp; Sustainable Agriculture</h2>
+        <p class="slide-desc">India's premier agriculture platform connecting 100,000+ farmers with bio-inputs, agronomist intelligence, and direct market access for bumper harvests.</p>
+        <div class="slide-actions">
+          <a href="#about" class="btn-primary">Discover More <span class="btn-icon">→</span></a>
+          <a href="#services" class="btn-outline">See All Services <span class="btn-icon">⚡</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=2400&q=85')"></div>
+      <div class="hero-slide-content">
+        <div class="slide-sub">🌱 Certified Diagnostics</div>
+        <div class="slide-category-tag">Healthy Soil · Maximum Yield</div>
+        <h2 class="slide-title">Precision <em>Soil Health</em><br>&amp; Smart Fertilization</h2>
+        <p class="slide-desc">Get your soil tested by certified agronomists and receive customized bio-nutrient prescriptions. Boost crop yield by up to 40% while rejuvenating soil microbiome.</p>
+        <div class="slide-actions">
+          <a href="#services" class="btn-primary">Book Soil Test <span class="btn-icon">→</span></a>
+          <a href="#products" class="btn-outline">Shop Fertilizers <span class="btn-icon">🌿</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2400&q=85')"></div>
+      <div class="hero-slide-content">
+        <div class="slide-sub">💧 Water-Smart Engineering</div>
+        <div class="slide-category-tag">Save 60% Water · Double Output</div>
+        <h2 class="slide-title"><em>Smart Irrigation</em><br>for Every Acre</h2>
+        <p class="slide-desc">Modern drip and automated sprinkler systems engineered for Indian agricultural terrain. Reduce groundwater consumption while guaranteeing root-zone hydration.</p>
+        <div class="slide-actions">
+          <a href="#products" class="btn-primary">Explore Equipment <span class="btn-icon">→</span></a>
+          <a href="#contact" class="btn-outline">Get Free Advice <span class="btn-icon">📞</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=2400&q=85')"></div>
+      <div class="hero-slide-content">
+        <div class="slide-sub">🏡 Protected Cultivation</div>
+        <div class="slide-category-tag">Year-Round High-Value Harvest</div>
+        <h2 class="slide-title">Commercial <em>Polyhouses</em><br>&amp; Greenhouse Tech</h2>
+        <p class="slide-desc">Protect your crops from extreme heatwaves, unseasonal rain, and pest outbreaks with subsidized modern polyhouse technology and climate automation.</p>
+        <div class="slide-actions">
+          <a href="#products" class="btn-primary">Explore Polyhouses <span class="btn-icon">→</span></a>
+          <a href="#knowledge" class="btn-outline">Read Guides <span class="btn-icon">📖</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=2400&q=85')"></div>
+      <div class="hero-slide-content">
+        <div class="slide-sub">🛰️ Digital Agriculture</div>
+        <div class="slide-category-tag">Next-Gen Farming Intelligence</div>
+        <h2 class="slide-title">Drone <em>Precision Spraying</em><br>&amp; Satellite Monitoring</h2>
+        <p class="slide-desc">Access weather radar intelligence, 10-minute drone spray booking, and expert crop disease identification — all in one unified platform built for Indian farmers.</p>
+        <div class="slide-actions">
+          <a href="#contact" class="btn-primary">Book Drone Spray <span class="btn-icon">→</span></a>
+          <a href="#partners" class="btn-outline">Our Partners <span class="btn-icon">🤝</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-track -->
+
+  <!-- Prev / Next arrows -->
+  <button class="hero-arrow prev" id="heroPrev" aria-label="Previous slide">‹</button>
+  <button class="hero-arrow next" id="heroNext" aria-label="Next slide">›</button>
+
+  <!-- Dot indicators -->
+  <div class="hero-dots" id="heroDots"></div>
+
+</section>
+
+<!-- STATS YELLOW BAND -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <div class="stat-avatars">
+        <div class="avatar-placeholder">👨‍🌾</div>
+        <div class="avatar-placeholder">👩‍🌾</div>
+        <div class="avatar-placeholder">🧑‍🌾</div>
+      </div>
+      <div class="stat-text">
+        <strong>100K+ Farmers</strong>
+        <span>With Positive Reviews</span>
+      </div>
+    </div>
+
+    <div class="stat-divider"></div>
+
+    <div class="stat-circle">
+      <span class="stat-circle-text">Vegetables · Seeds · Organic · Trusted</span>
+    </div>
+
+    <div class="stat-divider"></div>
+
+    <div class="stat-arrow-item">
+      <div class="stat-arrow-icon">↗</div>
+      <div class="stat-text">
+        <strong>Healthy Life</strong>
+        <span>With Fresh Products</span>
+      </div>
+    </div>
+
+    <div class="stat-divider"></div>
+
+    <div class="stat-video-thumb">
+      <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=600&q=85" alt="Farm Fresh Harvest Video" loading="lazy">
+      <div class="play-btn">▶</div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-header reveal">
+    <div class="section-title-block">
+      <div style="display:flex; gap:8px; margin-bottom:12px;">
+        <span class="section-label" data-i18n="services_label">Our Services</span>
+      </div>
+      <h2 class="section-title" data-i18n="services_title">We Offer Eco &amp;<br>Agriculture Services</h2>
+    </div>
+    <div class="section-nav">
+      <button class="nav-arrow" id="servicesPrevBtn" aria-label="Previous services">‹</button>
+      <button class="nav-arrow active" id="servicesNextBtn" aria-label="Next services">›</button>
+    </div>
+  </div>
+
+  <!-- Swiper Carousel for Services -->
+  <div class="swiper services-swiper">
+    <div class="swiper-wrapper services-grid services-grid-6" id="servicesGrid">
+      <div class="service-card swiper-slide reveal">
+        <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=85" alt="Agricultural Consulting" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Agricultural Consulting</span>
+          <h3>Farm Consultation</h3>
+          <p>Certified agronomists guide you through crop selection, disease prevention, and high-yield planning.</p>
+        </div>
+      </div>
+      <div class="service-card swiper-slide reveal" style="transition-delay:0.08s">
+        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=1200&q=85" alt="Soil Fertilization" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Soil Enhancement</span>
+          <h3>Soil Fertilization</h3>
+          <p>Certified lab soil chemistry analysis with tailored bio-fertilizer prescriptions for your land.</p>
+        </div>
+      </div>
+      <div class="service-card swiper-slide reveal" style="transition-delay:0.16s">
+        <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=1200&q=85" alt="Irrigation Services" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Smart Irrigation</span>
+          <h3>Irrigation Engineering</h3>
+          <p>Complete precision drip and automated sprinkler installation by certified water-management engineers.</p>
+        </div>
+      </div>
+      <div class="service-card swiper-slide reveal" style="transition-delay:0.24s">
+        <img src="https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=85" alt="Dairy Production" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Animal Husbandry</span>
+          <h3>Dairy Production</h3>
+          <p>Modern livestock nutrition, fodder management, and dairy disease prevention for rural farmers.</p>
+        </div>
+      </div>
+      <div class="service-card swiper-slide reveal" style="transition-delay:0.32s">
+        <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=1200&q=85" alt="Drone & Equipment Rental" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Drone & Machinery</span>
+          <h3>AgriTech Equipment</h3>
+          <p>Rent high-capacity spray drones, modern tractors, and combine harvesters at subsidized daily rates.</p>
+        </div>
+      </div>
+      <div class="service-card swiper-slide reveal" style="transition-delay:0.40s">
+        <img src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=1200&q=85" alt="Organic Certification" class="service-card-img" loading="lazy">
+        <div class="service-card-overlay">
+          <span class="service-tag">Organic Certification</span>
+          <h3>Organic Transition</h3>
+          <p>End-to-end advisory and certification support to transition your farm to premium organic production.</p>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-section" id="about">
+  <div class="about-inner">
+    <div class="about-left reveal">
+      <div class="about-img-collage">
+        <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=85" alt="Indian Farmer in Field" class="about-img-main" loading="lazy">
+        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=700&q=85" alt="Fresh Organic Produce" class="about-img-secondary" loading="lazy">
+      </div>
+      <div class="about-img-badge">
+        <strong>15+</strong>
+        <span>Years of Agriculture Experience</span>
+      </div>
+    </div>
+    <div class="about-right reveal" style="transition-delay:0.2s">
+      <span class="section-label">About GreenPulse</span>
+      <h2 class="section-title" style="color:var(--white)">Connecting Farmers with the Future of Agriculture</h2>
+      <p class="about-desc">GreenPulse is a premium agriculture platform that bridges the gap between farmers and the best products, services, and expertise available. We empower every farmer with knowledge and tools to thrive in modern agriculture.</p>
+      <div class="features-list">
+        <div class="feature-item">Expert Farm Consultation</div>
+        <div class="feature-item">Premium Organic Seeds</div>
+        <div class="feature-item">Soil Testing Services</div>
+        <div class="feature-item">Smart Irrigation</div>
+        <div class="feature-item">Weather Intelligence</div>
+        <div class="feature-item">Market Connectivity</div>
+      </div>
+      <a href="#contact" class="btn-primary" style="display:inline-flex; width:fit-content;">
+        Get Started Today <span class="btn-icon">→</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="section-header">
+    <div class="section-title-block reveal">
+      <span class="section-label" data-i18n="products_label">Our Products</span>
+      <h2 class="section-title" data-i18n="products_title">Premium Agriculture<br>Products for Farmers</h2>
+    </div>
+  </div>
+
+  <!-- Search & Category Filters -->
+  <div class="product-search-row reveal" style="display:flex; justify-content:center; margin-bottom:20px; padding:0 16px;">
+    <div style="position:relative; width:100%; max-width:540px;">
+      <input type="text" id="productSearchInput" placeholder="Search seeds, fertilizers, pesticides, equipment..." oninput="handleProductSearch(this.value)" style="width:100%; padding:14px 20px 14px 44px; border-radius:30px; border:1px solid rgba(255,255,255,0.18); background:rgba(255,255,255,0.06); backdrop-filter:blur(10px); color:var(--white); font-size:14px; outline:none; transition:var(--transition);" onfocus="this.style.borderColor='var(--green-bright)'" onblur="this.style.borderColor='rgba(255,255,255,0.18)'">
+      <span style="position:absolute; left:16px; top:50%; transform:translateY(-50%); font-size:16px; opacity:0.7;">🔍</span>
+    </div>
+  </div>
+
+  <div class="categories-filter reveal" id="productCategoryFilter">
+    <button class="cat-btn active" onclick="filterProductsByCategory('all')">All Products</button>
+    <button class="cat-btn" onclick="filterProductsByCategory('Fertilizers')">🌱 Fertilizers</button>
+    <button class="cat-btn" onclick="filterProductsByCategory('Pesticides')">🐛 Pesticides</button>
+    <button class="cat-btn" onclick="filterProductsByCategory('Seeds')">🌾 Seeds</button>
+    <button class="cat-btn" onclick="filterProductsByCategory('Equipment')">🚜 Equipment</button>
+    <button class="cat-btn" onclick="filterProductsByCategory('Organic')">🍃 Organic</button>
+  </div>
+  <div class="products-grid products-grid-8" id="productsGrid">
+    <div class="product-card reveal">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?w=800&q=100&fit=crop" alt="Bio Fertilizer">
+        <span class="product-badge">Popular</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Fertilizers</div>
+        <h4>Bio-Organic Fertilizer Pro</h4>
+        <p>Advanced organic formula for maximum crop yield and soil health.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Bio-Organic Fertilizer Pro')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.07s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&q=100&fit=crop" alt="Seeds">
+        <span class="product-badge new">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Seeds</div>
+        <h4>Hybrid Vegetable Seed Pack</h4>
+        <p>High-yield hybrid seeds tested for Indian climate and soil types.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Hybrid Vegetable Seed Pack')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.14s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=100&fit=crop" alt="Pesticide">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Pesticides</div>
+        <h4>NaturShield Pesticide</h4>
+        <p>Eco-friendly pest control effective against 200+ crop insects.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('NaturShield Pesticide')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.21s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1503596476-1c12a8ba09a9?w=800&q=100&fit=crop" alt="Drip Irrigation">
+        <span class="product-badge">Best Seller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Equipment</div>
+        <h4>Drip Irrigation Kit</h4>
+        <p>Complete drip irrigation setup for water-efficient farming at any scale.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Drip Irrigation Kit')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.28s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=100&fit=crop" alt="Sunflower Seeds">
+        <span class="product-badge new">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Seeds</div>
+        <h4>Sunflower Elite Seeds</h4>
+        <p>High oil-content sunflower variety with superior disease resistance.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Sunflower Elite Seeds')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.35s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?w=800&q=100&fit=crop" alt="Soil pH Meter">
+        <span class="product-badge">Popular</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Equipment</div>
+        <h4>Digital Soil pH Meter</h4>
+        <p>Instant, accurate soil pH and moisture readings for smart farming decisions.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Digital Soil pH Meter')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.42s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=800&q=100&fit=crop" alt="Organic Compost">
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Organic</div>
+        <h4>Premium Vermicompost</h4>
+        <p>Enriched earthworm compost for naturally boosting soil microbiome.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('Premium Vermicompost')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+    <div class="product-card reveal" style="transition-delay:0.49s">
+      <div class="product-img-wrap">
+        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?w=800&q=100&fit=crop" alt="Cotton Seeds">
+        <span class="product-badge">Best Seller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-cat">Seeds</div>
+        <h4>BT Cotton Seed Pack</h4>
+        <p>Bollworm-resistant BT cotton seeds for Andhra Pradesh &amp; Telangana farmers.</p>
+        <div class="product-footer">
+          <a href="#" class="btn-wa" onclick="openWhatsApp('BT Cotton Seed Pack')">📱 WhatsApp</a>
+          <button class="btn-inquiry">📞 Callback</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KNOWLEDGE CENTER -->
+<section class="knowledge-section" id="knowledge">
+  <div class="knowledge-inner">
+    <div class="section-header reveal" style="flex-direction:column; align-items:flex-start; gap:8px;">
+      <span class="section-label" data-i18n="knowledge_label">Knowledge Center</span>
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; width:100%; flex-wrap:wrap; gap:12px;">
+        <h2 class="section-title" data-i18n="knowledge_title">Expert Agriculture<br>Knowledge &amp; Guides</h2>
+        <a href="#knowledge" class="btn-primary" style="flex-shrink:0;" onclick="loadArticles()" data-i18n="knowledge_refresh">Explore Articles <span class="btn-icon">→</span></a>
+      </div>
+    </div>
+    <div class="articles-grid articles-grid-rich" id="articlesGrid">
+      <!-- Featured large card -->
+      <div class="article-card featured reveal">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1400&q=85" alt="Kharif Crop Planting" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">Crop Guides</span>
+          <h3>Complete Kharif Crop Guide: How to Maximize Yield This Season</h3>
+          <p>Proven agronomic techniques for paddy, cotton, and soybean cultivation with seasonal pest management tips from certified crop scientists.</p>
+          <div class="article-meta">
+            <span>📅 June 5, 2026</span>
+            <span>⏱ 8 min read</span>
+            <span>👁 2.4K views</span>
+          </div>
+        </div>
+      </div>
+      <!-- 4 smaller cards -->
+      <div class="article-card reveal" style="transition-delay:0.08s">
+        <img src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=85" alt="Fertilizer Soil Health" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">Fertilizer Info</span>
+          <h3>Choosing the Right Bio-Fertilizer for Sandy &amp; Red Soils</h3>
+          <p>Scientific recommendations for improving nutrient cation exchange and biological vitality.</p>
+          <div class="article-meta"><span>📅 June 2, 2026</span><span>⏱ 5 min read</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal" style="transition-delay:0.16s">
+        <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=800&q=85" alt="Smart Irrigation" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">Irrigation Tips</span>
+          <h3>Drip vs Sprinkler: Which Micro-Irrigation Suits Your Farm?</h3>
+          <p>A cost-benefit engineering breakdown to optimize pump electricity and water efficiency.</p>
+          <div class="article-meta"><span>📅 May 28, 2026</span><span>⏱ 6 min read</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal" style="transition-delay:0.24s">
+        <img src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=800&q=85" alt="Organic Transition" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">Organic Farming</span>
+          <h3>How to Transition Your Acreage to Certified Organic in 18 Months</h3>
+          <p>Step-by-step regulatory and biological roadmap for farmers targeting export premiums.</p>
+          <div class="article-meta"><span>📅 May 20, 2026</span><span>⏱ 10 min read</span></div>
+        </div>
+      </div>
+      <div class="article-card reveal" style="transition-delay:0.32s">
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=85" alt="Monsoon Preparation" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">Weather Tips</span>
+          <h3>Monsoon Drainage: Protect Root Zones from Waterlogging Damage</h3>
+          <p>Critical drainage trenches, field bund reinforcement, and pre-monsoon foliar protections.</p>
+          <div class="article-meta"><span>📅 May 15, 2026</span><span>⏱ 7 min read</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CINEMATIC CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-banner-bg" style="background-image:url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=85')"></div>
+  <div class="cta-banner-overlay"></div>
+  <div class="cta-banner-content reveal">
+    <span class="section-label" style="background:rgba(245,197,24,0.15); border-color:rgba(245,197,24,0.4); color:var(--yellow);">Join 100,000+ Farmers</span>
+    <h2>Ready to Transform<br>Your <em style="color:var(--yellow); font-style:normal;">Farming Journey?</em></h2>
+    <p>Get free access to verified agricultural inputs, agronomic advice, and village-level weather telemetry. India's most trusted agriculture platform is built for you.</p>
+    <div class="cta-banner-actions">
+      <a href="#contact" class="btn-primary" style="font-size:16px; padding:16px 36px;">Get Started Free <span class="btn-icon">→</span></a>
+      <a href="#" class="btn-outline" style="font-size:16px; padding:16px 36px;" onclick="openWhatsApp('Getting Started')">💬 Chat on WhatsApp</a>
+    </div>
+    <div class="cta-stats-row">
+      <div class="cta-stat"><strong>1,00,000+</strong><span>Registered Farmers</span></div>
+      <div class="cta-stat-div"></div>
+      <div class="cta-stat"><strong>500+</strong><span>Certified Products</span></div>
+      <div class="cta-stat-div"></div>
+      <div class="cta-stat"><strong>48</strong><span>Expert Agronomists</span></div>
+      <div class="cta-stat-div"></div>
+      <div class="cta-stat"><strong>30+</strong><span>AP &amp; TS Mandals</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- WEATHER -->
+<section class="weather-section" id="weather">
+  <div class="weather-inner">
+    <div class="section-header reveal" style="flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:0;">
+      <span class="section-label" data-i18n="weather_label">Live Weather</span>
+      <h2 class="section-title" style="color:var(--white)" data-i18n="weather_title">Agriculture Weather<br>Intelligence</h2>
+    </div>
+
+    <!-- Village Search & Mandal Quick Pick -->
+    <div class="weather-search-wrapper reveal" style="margin:20px 0 24px 0; max-width:650px;">
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <input type="text" id="weatherVillageInput" placeholder="Enter AP/Telangana village or mandal (e.g., Tenali, Bapatla, Chilakaluripet, Warangal)..." onkeydown="if(event.key==='Enter') searchWeatherByVillage()" style="flex:1; min-width:240px; padding:12px 18px; border-radius:10px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.08); color:var(--white); font-size:14px; outline:none;">
+        <button class="btn-primary" onclick="searchWeatherByVillage()" style="padding:12px 22px; border-radius:10px;">
+          <span>🔍</span> <span data-i18n="weather_search_btn">Check Weather</span>
+        </button>
+      </div>
+      <div class="quick-mandals" style="display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; align-items:center;">
+        <span style="font-size:12px; color:rgba(255,255,255,0.6);">Quick Pick:</span>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(16.3067, 80.4365, 'Guntur')">Guntur</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(16.2428, 80.6480, 'Tenali')">Tenali</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(16.5062, 80.6480, 'Vijayawada')">Vijayawada</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(15.9042, 80.4674, 'Bapatla')">Bapatla</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(16.0892, 80.1672, 'Chilakaluripet')">Chilakaluripet</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(17.9689, 79.5941, 'Warangal')">Warangal</button>
+        <button class="quick-mandal-btn" onclick="fetchWeatherForLocation(17.3850, 78.4867, 'Hyderabad')">Hyderabad</button>
+      </div>
+    </div>
+
+    <div class="weather-grid" id="weatherGrid">
+      <div class="weather-main-card reveal" id="weatherMainCard">
+        <div class="weather-location" id="weatherLocationName">📍 Guntur, Andhra Pradesh</div>
+        <div class="weather-temp" id="weatherCurrentTemp">34<sup>°C</sup></div>
+        <div class="weather-desc" id="weatherCurrentDesc">☀️ Sunny &amp; Clear — Good for fieldwork</div>
+        <div class="weather-stats">
+          <div class="weather-stat"><span data-i18n="weather_humidity">Humidity</span><strong id="weatherHumidity">68%</strong></div>
+          <div class="weather-stat"><span data-i18n="weather_wind">Wind</span><strong id="weatherWind">12 km/h</strong></div>
+          <div class="weather-stat"><span data-i18n="weather_rain">Rain</span><strong id="weatherRain">0 mm</strong></div>
+          <div class="weather-stat"><span data-i18n="weather_condition">Condition</span><strong id="weatherCondition">Clear</strong></div>
+        </div>
+      </div>
+      <div id="weatherForecastContainer" style="display:contents;">
+        <div class="weather-day-card today reveal" style="transition-delay:0.1s">
+          <div class="weather-day">MON</div>
+          <div class="weather-icon">☀️</div>
+          <div class="weather-day-temp">34°</div>
+          <div class="weather-day-low">26° low</div>
+          <div class="weather-rain">💧 15%</div>
+        </div>
+        <div class="weather-day-card reveal" style="transition-delay:0.2s">
+          <div class="weather-day">TUE</div>
+          <div class="weather-icon">⛅</div>
+          <div class="weather-day-temp">32°</div>
+          <div class="weather-day-low">25° low</div>
+          <div class="weather-rain">💧 30%</div>
+        </div>
+        <div class="weather-day-card reveal" style="transition-delay:0.3s">
+          <div class="weather-day">WED</div>
+          <div class="weather-icon">🌧️</div>
+          <div class="weather-day-temp">28°</div>
+          <div class="weather-day-low">23° low</div>
+          <div class="weather-rain">💧 75%</div>
+        </div>
+        <div class="weather-day-card reveal" style="transition-delay:0.4s">
+          <div class="weather-day">THU</div>
+          <div class="weather-icon">🌤️</div>
+          <div class="weather-day-temp">31°</div>
+          <div class="weather-day-low">24° low</div>
+          <div class="weather-rain">💧 20%</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Agricultural Advisories -->
+    <div id="weatherAdvisoriesContainer" class="weather-advisories-box reveal" style="margin-top:28px; background:rgba(255,255,255,0.04); border:1px solid rgba(108,198,68,0.25); border-radius:16px; padding:20px 24px; display:none;">
+      <h4 style="color:var(--yellow); font-family:var(--font-serif); font-size:18px; margin-bottom:14px; display:flex; align-items:center; gap:8px;">
+        <span>🌾</span> <span data-i18n="weather_advisories_heading">Smart Agricultural Advisories</span>
+      </h4>
+      <div id="weatherAdvisoriesList" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:12px;"></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" id="testimonials">
+  <div class="section-header reveal" style="flex-direction:column; align-items:flex-start; gap:8px; margin-bottom:0;">
+    <span class="section-label" data-i18n="testimonials_label">Testimonials</span>
+    <h2 class="section-title" data-i18n="testimonials_title">What Farmers Say About Us</h2>
+  </div>
+  <div class="testimonials-grid" id="testimonialsGrid">
+    <div class="testimonial-card reveal">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">"GreenPulse transformed my farming completely. I found the best fertilizers and soil testing services right here. My paddy yield increased by 40% this season!"</p>
+      <div class="testimonial-author">
+        <img class="author-avatar-img" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=120&q=90&fit=crop&crop=face" alt="Ravi Kumar">
+        <div class="author-info">
+          <h5>Ravi Kumar Reddy</h5>
+          <span>Paddy Farmer, Guntur</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.1s">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">"The knowledge center articles helped me understand drip irrigation. The WhatsApp support team responded instantly. Excellent platform for every farmer."</p>
+      <div class="testimonial-author">
+        <img class="author-avatar-img" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=120&q=90&fit=crop&crop=face" alt="Lakshmi Devi">
+        <div class="author-info">
+          <h5>Lakshmi Devi</h5>
+          <span>Vegetable Farmer, Krishna</span>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal" style="transition-delay:0.2s">
+      <div class="testimonial-stars">
+        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      </div>
+      <p class="testimonial-text">"As an agricultural input company, partnering with GreenPulse gave us direct access to thousands of serious farmers. Our inquiries doubled within the first month of listing."</p>
+      <div class="testimonial-author">
+        <img class="author-avatar-img" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&q=90&fit=crop&crop=face" alt="Suresh Agro">
+        <div class="author-info">
+          <h5>Suresh Agro Ltd.</h5>
+          <span>Agriculture Company, Hyderabad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners-section" id="partners">
+  <div class="partners-inner">
+    <div class="reveal" style="text-align:center; margin-bottom:0;">
+      <span class="section-label" style="background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.1); color:rgba(255,255,255,0.6);" data-i18n="partners_label">Trusted Partners</span>
+      <h2 class="section-title" style="color:var(--white); text-align:center; margin-top:8px;" data-i18n="partners_title">Powering Agriculture<br>with Leading Brands</h2>
+    </div>
+    <!-- Partner cards with images -->
+    <div class="partner-cards-grid" id="partnersGrid">
+      <div class="partner-card-visual reveal">
+        <img src="https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=500&q=85" alt="AgriGold Seeds" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">🌱</div>
+          <h4>AgriGold Seeds</h4>
+          <p>India's leading hybrid seed producer with 500+ tested varieties</p>
+        </div>
+      </div>
+      <div class="partner-card-visual reveal" style="transition-delay:0.08s">
+        <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?auto=format&fit=crop&w=500&q=85" alt="KrishiMart" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">🌾</div>
+          <h4>KrishiMart</h4>
+          <p>Direct mandi market access &amp; commodity logistics</p>
+        </div>
+      </div>
+      <div class="partner-card-visual reveal" style="transition-delay:0.16s">
+        <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?auto=format&fit=crop&w=500&q=85" alt="FarmTech Pro" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">🚜</div>
+          <h4>FarmTech Pro</h4>
+          <p>Smart precision farming equipment &amp; IoT sensor arrays</p>
+        </div>
+      </div>
+      <div class="partner-card-visual reveal" style="transition-delay:0.24s">
+        <img src="https://images.unsplash.com/photo-1615811361523-6bd03d7748e7?auto=format&fit=crop&w=500&q=85" alt="OrganicIndia" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">🌿</div>
+          <h4>OrganicIndia</h4>
+          <p>Certified organic input supplier &amp; premium export partner</p>
+        </div>
+      </div>
+      <div class="partner-card-visual reveal" style="transition-delay:0.32s">
+        <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=500&q=85" alt="AquaSmart" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">💧</div>
+          <h4>AquaSmart</h4>
+          <p>Water-saving pressure-compensating drip &amp; micro-sprinklers</p>
+        </div>
+      </div>
+      <div class="partner-card-visual reveal" style="transition-delay:0.4s">
+        <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=500&q=85" alt="BioGrow Labs" loading="lazy">
+        <div class="partner-card-body">
+          <div class="partner-card-icon">⚗️</div>
+          <h4>BioGrow Labs</h4>
+          <p>Biostimulants, microbial inoculants &amp; soil conditioners</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO GALLERY — Farm Life Gallery with PhotoSwipe 5 Lightbox -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="reveal" style="text-align:center; margin-bottom:48px;">
+      <span class="section-label" style="background:rgba(212,163,115,0.12); color:var(--gold-accent); border:1px solid rgba(212,163,115,0.25);">Farm Life Gallery</span>
+      <h2 class="section-title" style="text-align:center; margin-top:8px;">The Beauty of<br><em style="font-style:italic; color:var(--green-bright)">Indian Agriculture</em></h2>
+      <p style="color:var(--gray-text); margin-top:12px; font-size:15px;">A visual celebration of the fields, farmers, and harvests that feed the nation · Click any image to view in fullscreen</p>
+    </div>
+
+    <!-- Masonry-style photo grid with PhotoSwipe links -->
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- Row 1 -->
+      <a href="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=2400&q=85" 
+         class="gallery-item tall reveal" 
+         data-pswp-width="2400" 
+         data-pswp-height="1600"
+         data-cropped="true">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=1000&q=85" alt="Golden wheat field at sunset" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌾 Golden Wheat Fields at Sunset</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.06s">
+        <img src="https://images.unsplash.com/photo-1500937386664-56d1dfef3854?auto=format&fit=crop&w=800&q=85" alt="Emerald paddy crop in Andhra Pradesh" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌱 Paddy Fields, Andhra Pradesh</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.12s">
+        <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?auto=format&fit=crop&w=800&q=85" alt="Modern tractor cultivating field" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🚜 Modern Farm Machinery</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <!-- Row 2 -->
+      <a href="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item wide reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.06s">
+        <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?auto=format&fit=crop&w=1200&q=85" alt="Organic vegetable harvest in farmer hands" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🥕 Organic Vegetable Harvest</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.12s">
+        <img src="https://images.unsplash.com/photo-1530595467537-0b5996c41f2d?auto=format&fit=crop&w=800&q=85" alt="Dawn sprinkler irrigation" loading="lazy">
+        <div class="gallery-overlay">
+          <span>💧 Dawn Precision Irrigation</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item tall reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.18s">
+        <img src="https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=800&q=85" alt="Indian farmer in flourishing crop field" loading="lazy">
+        <div class="gallery-overlay">
+          <span>👨‍🌾 Flourishing Harvest Season</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <!-- Row 3 -->
+      <a href="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.06s">
+        <img src="https://images.unsplash.com/photo-1597848212624-a19eb35e2651?auto=format&fit=crop&w=800&q=85" alt="Sunflower bloom" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌻 Sunflower Plantation Bloom</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.12s">
+        <img src="https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=800&q=85" alt="High-tech polyhouse greenhouse interior" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🏡 Modern Polyhouse Greenhouse</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=2000&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="2000" 
+         data-pswp-height="1333" 
+         data-cropped="true"
+         style="transition-delay:0.18s">
+        <img src="https://images.unsplash.com/photo-1563514227147-6d2ff665a6a0?auto=format&fit=crop&w=800&q=85" alt="Agricultural drone mapping farm fields" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🛰️ Drone Crop Monitoring</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <!-- Row 4: Panorama -->
+      <a href="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=2400&q=85" 
+         class="gallery-item panorama reveal" 
+         data-pswp-width="2400" 
+         data-pswp-height="1200" 
+         data-cropped="true">
+        <img src="https://images.unsplash.com/photo-1533240332313-0db49b459ad6?auto=format&fit=crop&w=1600&q=85" alt="Aerial terraced farm landscape" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌄 Aerial Terraced Farm Landscape</span>
+          <small>🔍 Click to expand</small>
+        </div>
+      </a>
+
+      <!-- Row 5: 4 Small items -->
+      <a href="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1600&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="1600" 
+         data-pswp-height="1066" 
+         data-cropped="true"
+         style="transition-delay:0.04s">
+        <img src="https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=600&q=85" alt="Hands planting monsoon rice seedlings" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌾 Monsoon Rice Planting</span>
+          <small>🔍 Click</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=1600&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="1600" 
+         data-pswp-height="1066" 
+         data-cropped="true"
+         style="transition-delay:0.08s">
+        <img src="https://images.unsplash.com/photo-1574943320219-553eb213f72d?auto=format&fit=crop&w=600&q=85" alt="Organic Vermicompost Soil Biology" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌱 Organic Soil Biology</span>
+          <small>🔍 Click</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=1600&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="1600" 
+         data-pswp-height="1066" 
+         data-cropped="true"
+         style="transition-delay:0.12s">
+        <img src="https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=600&q=85" alt="High-yield hybrid seeds" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🌽 Certified Hybrid Seeds</span>
+          <small>🔍 Click</small>
+        </div>
+      </a>
+
+      <a href="https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?auto=format&fit=crop&w=1600&q=85" 
+         class="gallery-item reveal" 
+         data-pswp-width="1600" 
+         data-pswp-height="1066" 
+         data-cropped="true"
+         style="transition-delay:0.16s">
+        <img src="https://images.unsplash.com/photo-1567954970774-58d6aa6c50dc?auto=format&fit=crop&w=600&q=85" alt="Digital soil sensor tester" loading="lazy">
+        <div class="gallery-overlay">
+          <span>🧪 Digital Soil Telemetry</span>
+          <small>🔍 Click</small>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info reveal">
+      <span class="section-label" data-i18n="contact_label">Contact Us</span>
+      <h2 class="section-title" data-i18n="contact_title">Get in Touch with<br>Our Expert Team</h2>
+      <p class="contact-desc" data-i18n="contact_desc">Have questions about products, services, or partnership opportunities? Our agriculture experts are ready to help you succeed.</p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div>
+            <strong id="contactPhoneDisplay">+91 98765 43210</strong><br>
+            <span style="font-size:12px; color:var(--gray-text)">Mon-Sat 9AM - 6PM IST</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📧</div>
+          <div id="contactEmailDisplay">hello@greenpulse.in</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div>Guntur &amp; Hyderabad, India</div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">💬</div>
+          <a href="#" class="btn-wa" onclick="openWhatsApp('General Inquiry')" style="flex:none; width:auto; padding:10px 20px;">Chat on WhatsApp</a>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal" style="transition-delay:0.2s">
+      <h3 data-i18n="contact_form_title">Send us a Message</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-i18n="form_name">Your Name *</label>
+          <input type="text" id="contactName" placeholder="Ravi Kumar" required>
+        </div>
+        <div class="form-group">
+          <label data-i18n="form_phone">Phone Number *</label>
+          <input type="tel" id="contactPhone" placeholder="+91 98765 43210" required>
+        </div>
+      </div>
+      <!-- Honeypot Bot Trap (Invisible to humans) -->
+      <div style="display:none;" aria-hidden="true">
+        <label>Do not fill this</label>
+        <input type="text" id="contactHp" name="hp_website" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="form-group">
+        <label data-i18n="form_village">Village / Mandal / Location</label>
+        <input type="text" id="contactVillage" placeholder="Your village or mandal (e.g. Tenali)">
+      </div>
+      <div class="form-group">
+        <label data-i18n="form_crop">Main Crop</label>
+        <select id="contactCrop">
+          <option value="">Select your crop</option>
+          <option value="Paddy / Rice">Paddy / Rice (వరి)</option>
+          <option value="Cotton">Cotton (పత్తి)</option>
+          <option value="Chilli">Chilli (మిరప)</option>
+          <option value="Sugarcane">Sugarcane (చెరకు)</option>
+          <option value="Vegetables">Vegetables (కూరగాయలు)</option>
+          <option value="Groundnut">Groundnut (వేరుశనగ)</option>
+          <option value="Maize">Maize (మొక్కజొన్న)</option>
+          <option value="Other">Other (ఇతర పంట)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="form_message">Message / Inquiry</label>
+        <textarea id="contactMessage" placeholder="Tell us how we can help you with seeds, fertilizers, or consultation..."></textarea>
+      </div>
+      <button class="btn-primary" id="contactSubmitBtn" style="width:100%; justify-content:center;" onclick="submitForm(event)">
+        <span data-i18n="form_submit">Send Message</span> <span class="btn-icon">→</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <div class="logo-icon">🌿</div>
+          <span class="logo-text">Green<span>Pulse</span></span>
+        </a>
+        <p class="footer-tagline">India's premier agriculture platform connecting farmers with products, services, and expert knowledge for a thriving harvest.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">📘</a>
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">💼</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul class="footer-links">
+          <li><a href="#">Products</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Partners</a></li>
+          <li><a href="#">Knowledge Center</a></li>
+          <li><a href="#">Weather</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Company</h5>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Support</h5>
+        <ul class="footer-links">
+          <li><a href="#about">Help Center</a></li>
+          <li><a href="#about">Privacy Policy</a></li>
+          <li><a href="#about">Terms of Service</a></li>
+          <li><a href="#partners">Partner Portal</a></li>
+          <li><a href="admin.html" style="color:var(--yellow); font-weight:600;">Admin Dashboard 🔒</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 GreenPulse. All rights reserved. Built for Indian Farmers 🇮🇳</span>
+      <span>Made with 💚 in <a href="#">Andhra Pradesh</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<div class="wa-float">
+  <div class="wa-tooltip">Chat with us on WhatsApp</div>
+  <a href="#" class="wa-btn" onclick="openWhatsApp('General')">💬</a>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     MODALS SECTION
+═══════════════════════════════════════════════════════════════════ -->
+
+<!-- 1. FARMER AUTH MODAL (Login / Register) -->
+<div id="farmerAuthModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeFarmerAuth()">
+  <div class="gp-modal-content" style="max-width:440px;">
+    <div class="gp-modal-header">
+      <div style="display:flex; gap:12px; align-items:center;">
+        <span style="font-size:24px;">👨‍🌾</span>
+        <h3 id="farmerAuthTitle" style="color:var(--white); margin:0;">Farmer Portal</h3>
+      </div>
+      <button class="gp-modal-close" onclick="closeFarmerAuth()">✕</button>
+    </div>
+
+    <!-- Auth Tabs -->
+    <div style="display:flex; border-bottom:1px solid rgba(255,255,255,0.12); margin-bottom:20px;">
+      <button id="authTabLogin" class="tab-btn active" onclick="switchFarmerAuthTab('login')" style="flex:1; padding:12px; background:none; border:none; border-bottom:2px solid var(--green-bright); color:var(--white); font-weight:600; cursor:pointer;">Login</button>
+      <button id="authTabRegister" class="tab-btn" onclick="switchFarmerAuthTab('register')" style="flex:1; padding:12px; background:none; border:none; border-bottom:2px solid transparent; color:rgba(255,255,255,0.6); font-weight:600; cursor:pointer;">Register (New Farmer)</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="farmerLoginForm" onsubmit="handleFarmerLogin(event)" style="display:block;">
+      <div class="form-group" style="margin-bottom:14px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px; display:block;">Phone Number or Email</label>
+        <input type="text" id="loginPhoneOrEmail" placeholder="Enter your 10-digit phone or email" required style="width:100%; padding:12px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-group" style="margin-bottom:18px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:6px; display:block;">Password</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" required style="width:100%; padding:12px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <button type="submit" id="farmerLoginSubmitBtn" class="btn-primary" style="width:100%; justify-content:center; padding:13px;">Login to GreenPulse</button>
+
+      <div style="margin-top:16px; padding:10px; background:rgba(245,197,24,0.08); border:1px dashed rgba(245,197,24,0.3); border-radius:8px; text-align:center;">
+        <span style="font-size:12px; color:var(--yellow);">Demo quick fill: </span>
+        <button type="button" onclick="quickFillFarmerLogin()" style="background:none; border:none; color:var(--green-bright); text-decoration:underline; font-size:12px; cursor:pointer; font-weight:600;">Auto-fill Farmer Test Account</button>
+      </div>
+    </form>
+
+    <!-- Register Form -->
+    <form id="farmerRegisterForm" onsubmit="handleFarmerRegister(event)" style="display:none;">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Full Name *</label>
+        <input type="text" id="regName" placeholder="Ramesh Naidu" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-row" style="display:flex; gap:10px; margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Phone Number *</label>
+          <input type="tel" id="regPhone" placeholder="9876543210" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Village / Mandal *</label>
+          <input type="text" id="regVillage" placeholder="Tenali" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+      </div>
+      <div class="form-row" style="display:flex; gap:10px; margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">State</label>
+          <select id="regState" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:#1e293b; color:var(--white);">
+            <option value="Andhra Pradesh">Andhra Pradesh</option>
+            <option value="Telangana">Telangana</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Main Crop</label>
+          <input type="text" id="regCrop" placeholder="Paddy / Chilli" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Create Password * (min 6 chars)</label>
+        <input type="password" id="regPassword" placeholder="••••••••" required minlength="6" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <button type="submit" id="farmerRegisterSubmitBtn" class="btn-primary" style="width:100%; justify-content:center; padding:13px;">Create Free Farmer Account</button>
+    </form>
+  </div>
+</div>
+
+<!-- 2. FARMER PROFILE MODAL -->
+<div id="farmerProfileModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeFarmerProfile()">
+  <div class="gp-modal-content" style="max-width:480px;">
+    <div class="gp-modal-header">
+      <div style="display:flex; gap:12px; align-items:center;">
+        <div style="width:42px; height:42px; border-radius:50%; background:var(--green-bright); display:flex; align-items:center; justify-content:center; font-size:20px;">🌾</div>
+        <div>
+          <h3 id="profileModalName" style="color:var(--white); margin:0;">Farmer Profile</h3>
+          <span id="profileModalRole" style="font-size:12px; color:var(--green-bright);">Verified Farmer Member</span>
+        </div>
+      </div>
+      <button class="gp-modal-close" onclick="closeFarmerProfile()">✕</button>
+    </div>
+
+    <form id="farmerProfileForm" onsubmit="handleProfileUpdate(event)">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Full Name</label>
+        <input type="text" id="profName" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-row" style="display:flex; gap:10px; margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Phone (Read Only)</label>
+          <input type="text" id="profPhone" readonly disabled style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.03); color:rgba(255,255,255,0.5);">
+        </div>
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Village / Mandal</label>
+          <input type="text" id="profVillage" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+      </div>
+      <div class="form-row" style="display:flex; gap:10px; margin-bottom:12px;">
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">State</label>
+          <input type="text" id="profState" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+        <div style="flex:1;">
+          <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Farm Land (Acres)</label>
+          <input type="number" step="0.5" id="profLand" placeholder="e.g. 5" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+        </div>
+      </div>
+      <div class="form-group" style="margin-bottom:18px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Main Crops Grown</label>
+        <input type="text" id="profCrops" placeholder="Paddy, Chilli, Cotton" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div style="display:flex; gap:10px;">
+        <button type="submit" class="btn-primary" style="flex:1; justify-content:center; padding:12px;">Save Profile</button>
+        <button type="button" onclick="handleFarmerLogout()" class="btn-outline" style="border-color:rgba(239,68,68,0.5); color:#ef4444; padding:12px 18px;">Logout</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 3. PRODUCT DETAIL MODAL -->
+<div id="productDetailModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeProductDetail()">
+  <div class="gp-modal-content" style="max-width:620px;">
+    <div class="gp-modal-header">
+      <span class="section-label" id="productModalCategory" style="margin:0;">Category</span>
+      <button class="gp-modal-close" onclick="closeProductDetail()">✕</button>
+    </div>
+    <div style="text-align:center; margin:14px 0 18px 0;">
+      <img id="productModalImage" src="" alt="Product" style="max-height:260px; max-width:100%; object-fit:contain; border-radius:12px; background:rgba(255,255,255,0.03);">
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+      <h2 id="productModalTitle" style="color:var(--white); font-family:var(--font-serif); font-size:22px; margin:0;">Product Name</h2>
+      <span id="productModalPrice" style="color:var(--yellow); font-size:20px; font-weight:700;">₹0</span>
+    </div>
+    <p id="productModalDesc" style="color:rgba(255,255,255,0.8); font-size:14px; line-height:1.6; margin-bottom:16px;">Product description...</p>
+    
+    <div id="productModalDetailsBox" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:12px 16px; margin-bottom:20px;">
+      <h5 style="color:var(--green-bright); margin:0 0 6px 0; font-size:13px;">Product Details &amp; Specifications:</h5>
+      <p id="productModalDetails" style="color:rgba(255,255,255,0.7); font-size:13px; line-height:1.5; margin:0; white-space:pre-line;"></p>
+    </div>
+
+    <div style="display:flex; gap:12px; flex-wrap:wrap;">
+      <button id="productModalWaBtn" class="btn-wa" style="flex:1; justify-content:center; padding:12px 16px;">📱 Order via WhatsApp</button>
+      <button id="productModalInquiryBtn" class="btn-primary" style="flex:1; justify-content:center; padding:12px 16px;">📞 Request Callback</button>
+    </div>
+  </div>
+</div>
+
+<!-- 4. SERVICE DETAIL MODAL -->
+<div id="serviceDetailModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeServiceDetail()">
+  <div class="gp-modal-content" style="max-width:600px;">
+    <div class="gp-modal-header">
+      <span class="section-label" id="serviceModalTag" style="margin:0;">Service</span>
+      <button class="gp-modal-close" onclick="closeServiceDetail()">✕</button>
+    </div>
+    <div style="margin:14px 0 18px 0; text-align:center;">
+      <img id="serviceModalImage" src="" alt="Service" style="width:100%; max-height:260px; object-fit:cover; border-radius:12px;">
+    </div>
+    <h2 id="serviceModalTitle" style="color:var(--white); font-family:var(--font-serif); font-size:24px; margin:0 0 10px 0;">Service Title</h2>
+    <p id="serviceModalDesc" style="color:rgba(255,255,255,0.85); font-size:14px; line-height:1.6; margin-bottom:16px;">Description</p>
+    
+    <div id="serviceModalDetailsBox" style="background:rgba(255,255,255,0.04); border-radius:8px; padding:14px 18px; margin-bottom:20px;">
+      <h5 style="color:var(--green-bright); margin:0 0 8px 0; font-size:13px;">What You Get &amp; Implementation Details:</h5>
+      <p id="serviceModalDetails" style="color:rgba(255,255,255,0.75); font-size:13px; line-height:1.6; margin:0; white-space:pre-line;"></p>
+    </div>
+
+    <div style="display:flex; gap:12px;">
+      <button id="serviceModalWaBtn" class="btn-wa" style="flex:1; justify-content:center; padding:12px 16px;">📱 Book Service on WhatsApp</button>
+      <button id="serviceModalInquiryBtn" class="btn-primary" style="flex:1; justify-content:center; padding:12px 16px;">📞 Request Expert Call</button>
+    </div>
+  </div>
+</div>
+
+<!-- 5. ARTICLE READER MODAL -->
+<div id="articleReaderModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeArticleReader()">
+  <div class="gp-modal-content" style="max-width:720px; max-height:90vh; overflow-y:auto;">
+    <div class="gp-modal-header">
+      <span class="section-label" id="articleReaderTag" style="margin:0;">Knowledge Guide</span>
+      <button class="gp-modal-close" onclick="closeArticleReader()">✕</button>
+    </div>
+    <div style="margin:14px 0 18px 0;">
+      <img id="articleReaderImage" src="" alt="Article cover" style="width:100%; max-height:300px; object-fit:cover; border-radius:12px;">
+    </div>
+    <h1 id="articleReaderTitle" style="color:var(--white); font-family:var(--font-serif); font-size:26px; line-height:1.3; margin-bottom:12px;">Article Title</h1>
+    <div class="article-meta" style="margin-bottom:20px; display:flex; gap:14px; font-size:12px; color:rgba(255,255,255,0.6);">
+      <span id="articleReaderDate">📅 June 2026</span>
+      <span id="articleReaderAuthor">✍️ Agronomist</span>
+      <span id="articleReaderTime">⏱ 5 min read</span>
+      <span id="articleReaderViews">👁 0 views</span>
+    </div>
+    <div id="articleReaderContent" style="color:rgba(255,255,255,0.85); font-size:15px; line-height:1.8; white-space:pre-line;">
+      <!-- Content rendered dynamically -->
+    </div>
+  </div>
+</div>
+
+<!-- 6. INQUIRY / CALLBACK MODAL -->
+<div id="inquiryModal" class="gp-modal" style="display:none;" onclick="if(event.target===this) closeInquiryModal()">
+  <div class="gp-modal-content" style="max-width:440px;">
+    <div class="gp-modal-header">
+      <div style="display:flex; gap:10px; align-items:center;">
+        <span style="font-size:22px;">📞</span>
+        <h3 id="inquiryModalHeading" style="color:var(--white); margin:0;">Request a Callback</h3>
+      </div>
+      <button class="gp-modal-close" onclick="closeInquiryModal()">✕</button>
+    </div>
+    <p id="inquiryModalSubtitle" style="color:rgba(255,255,255,0.7); font-size:13px; margin:10px 0 16px 0;">Our agricultural expert will call you back within 2 hours.</p>
+    <form id="inquiryQuickForm" onsubmit="handleInquirySubmit(event)">
+      <input type="hidden" id="inquirySubject" value="">
+      <input type="hidden" id="inquiryType" value="callback">
+      <div class="form-group" style="margin-bottom:12px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Your Name *</label>
+        <input type="text" id="inquiryName" placeholder="Ramesh" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Phone Number *</label>
+        <input type="tel" id="inquiryPhone" placeholder="9876543210" required style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-group" style="margin-bottom:12px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Village / Mandal</label>
+        <input type="text" id="inquiryVillage" placeholder="Tenali" style="width:100%; padding:11px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white);">
+      </div>
+      <div class="form-group" style="margin-bottom:16px;">
+        <label style="color:rgba(255,255,255,0.8); font-size:13px; margin-bottom:4px; display:block;">Notes / Crop Details</label>
+        <textarea id="inquiryNotes" rows="2" placeholder="Tell us your questions or crop type..." style="width:100%; padding:10px 14px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); background:rgba(255,255,255,0.06); color:var(--white); resize:none;"></textarea>
+      </div>
+      <button type="submit" id="inquirySubmitBtn" class="btn-primary" style="width:100%; justify-content:center; padding:13px;">Confirm Callback Request</button>
+    </form>
+  </div>
+</div>
+
+<!-- 7. TOAST NOTIFICATIONS CONTAINER -->
+<div id="toastContainer" class="toast-container" style="position:fixed; bottom:28px; right:28px; z-index:999999; display:flex; flex-direction:column; gap:10px; pointer-events:none;"></div>
+
+<!-- MODERN VISUAL PLATFORM LIBRARIES -->
+<!-- GSAP & ScrollTrigger (Smooth parallax & staggers) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<!-- Swiper 11 (Modern touch-friendly carousels) -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<!-- PhotoSwipe 5 (60fps Fullscreen Lightbox & pinch-to-zoom) -->
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/umd/photoswipe.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@5.4.4/dist/umd/photoswipe-lightbox.umd.min.js"></script>
+<!-- Vanilla LazyLoad (High-performance responsive image loading) -->
+<script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.min.js"></script>
+
+<script>
+  /* ═══════════════════════════════════════════
+     HERO CAROUSEL — JioHotstar-style
+  ═══════════════════════════════════════════ */
+  (function() {
+    const SLIDE_DURATION = 5000; // ms per slide
+    const TRANSITION_MS  = 750;
+
+    const track      = document.getElementById('heroTrack');
+    const slides     = Array.from(track.querySelectorAll('.hero-slide'));
+    const dotsWrap   = document.getElementById('heroDots');
+    const progWrap   = document.getElementById('heroProgress');
+    const prevBtn    = document.getElementById('heroPrev');
+    const nextBtn    = document.getElementById('heroNext');
+
+    let current  = 0;
+    let timer    = null;
+    let progTimer = null;
+    let progEl   = null;       // active fill bar
+    const TOTAL  = slides.length;
+
+    /* ── build dots ── */
+    slides.forEach((_, i) => {
+      const d = document.createElement('button');
+      d.className = 'hero-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', 'Slide ' + (i+1));
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    /* ── build progress bars ── */
+    slides.forEach((_, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'progress-bar';
+      const fill = document.createElement('div');
+      fill.className = 'progress-bar-fill';
+      bar.appendChild(fill);
+      progWrap.appendChild(bar);
+    });
+
+    const progressBars = Array.from(progWrap.querySelectorAll('.progress-bar'));
+    const dots         = Array.from(dotsWrap.querySelectorAll('.hero-dot'));
+
+    function startProgress() {
+      clearInterval(progTimer);
+      const bar = progressBars[current];
+      const fill = bar.querySelector('.progress-bar-fill');
+      fill.style.transition = 'none';
+      fill.style.width = '0%';
+      // force reflow
+      fill.getBoundingClientRect();
+      fill.style.transition = `width ${SLIDE_DURATION}ms linear`;
+      fill.style.width = '100%';
+      progEl = fill;
+    }
+
+    function resetProgress(idx) {
+      progressBars.forEach((bar, i) => {
+        const fill = bar.querySelector('.progress-bar-fill');
+        fill.style.transition = 'none';
+        if (i < idx)       { fill.style.width = '100%'; bar.classList.add('done'); }
+        else if (i === idx) { fill.style.width = '0%';  bar.classList.remove('done'); }
+        else               { fill.style.width = '0%';  bar.classList.remove('done'); }
+      });
+    }
+
+    function goTo(index, dir) {
+      if (index === current) return;
+
+      // deactivate current
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      progressBars[current].querySelector('.progress-bar-fill').style.transition = 'none';
+
+      current = (index + TOTAL) % TOTAL;
+
+      // activate new
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      track.style.transform = `translateX(-${current * 100}%)`;
+
+      resetProgress(current);
+      startProgress();
+      scheduleNext();
+    }
+
+    function scheduleNext() {
+      clearTimeout(timer);
+      timer = setTimeout(() => goTo(current + 1), SLIDE_DURATION);
+    }
+
+    /* ── arrows ── */
+    prevBtn.addEventListener('click', () => goTo(current - 1));
+    nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    /* ── touch / swipe ── */
+    let touchStartX = 0;
+    track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) goTo(dx < 0 ? current + 1 : current - 1);
+    }, { passive: true });
+
+    /* ── keyboard ── */
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    /* ── pause on hover ── */
+    track.addEventListener('mouseenter', () => { clearTimeout(timer); });
+    track.addEventListener('mouseleave', () => { scheduleNext(); });
+
+    /* ── kick off ── */
+    resetProgress(0);
+    startProgress();
+    scheduleNext();
+  })();
+
+  /* ═══════════════════════════════════════════
+     BACKEND & ENVIRONMENT CONFIG
+  ═══════════════════════════════════════════ */
+  const BACKEND_URL = (function() {
+    if (window.GREENPULSE_API_URL) return window.GREENPULSE_API_URL;
+    const host = window.location.hostname;
+    if (host === 'localhost' || host === '127.0.0.1') {
+      return 'http://localhost:8000/api/v1';
+    }
+    // Production / Vercel:
+    return window.location.origin.includes('vercel.app') 
+      ? window.location.origin + '/api/v1' 
+      : 'https://greenpulse-backend.onrender.com/api/v1';
+  })();
+
+  /* ═══════════════════════════════════════════
+     BILINGUAL TRANSLATION DICTIONARY (EN & TE)
+  ═══════════════════════════════════════════ */
+  const I18N = {
+    en: {
+      nav_home: "Home",
+      nav_about: "About Us",
+      nav_services: "Services",
+      nav_products: "Products",
+      nav_knowledge: "Knowledge",
+      nav_weather: "Weather",
+      nav_contact: "Contact",
+      nav_farmer_login: "Farmer Login",
+      services_label: "Our Services",
+      services_title: "We Offer Eco & Agriculture Services",
+      products_label: "Our Products",
+      products_title: "Premium Agriculture Products for Farmers",
+      knowledge_label: "Knowledge Center",
+      knowledge_title: "Expert Agriculture Knowledge & Guides",
+      knowledge_refresh: "Explore Articles →",
+      weather_label: "Live Weather",
+      weather_title: "Agriculture Weather Intelligence",
+      weather_search_btn: "Check Weather",
+      weather_humidity: "Humidity",
+      weather_wind: "Wind",
+      weather_rain: "Rain",
+      weather_condition: "Condition",
+      weather_advisories_heading: "Smart Agricultural Advisories",
+      testimonials_label: "Testimonials",
+      testimonials_title: "What Farmers Say About Us",
+      partners_label: "Trusted Partners",
+      partners_title: "Powering Agriculture with Leading Brands",
+      contact_label: "Contact Us",
+      contact_title: "Get in Touch with Our Expert Team",
+      contact_desc: "Have questions about products, services, or partnership opportunities? Our agriculture experts are ready to help you succeed.",
+      contact_form_title: "Send us a Message",
+      form_name: "Your Name *",
+      form_phone: "Phone Number *",
+      form_village: "Village / Mandal / Location",
+      form_crop: "Main Crop",
+      form_message: "Message / Inquiry",
+      form_submit: "Send Message",
+      btn_whatsapp: "📱 WhatsApp",
+      btn_callback: "📞 Callback",
+      order_whatsapp: "Order via WhatsApp",
+      request_callback: "Request Callback"
+    },
+    te: {
+      nav_home: "హోమ్",
+      nav_about: "మా గురించి",
+      nav_services: "సేవలు",
+      nav_products: "ఉత్పత్తులు",
+      nav_knowledge: "రైతు విజ్ఞానం",
+      nav_weather: "వాతావరణం",
+      nav_contact: "సంప్రదించండి",
+      nav_farmer_login: "రైతు లాగిన్",
+      services_label: "మా సేవలు",
+      services_title: "పర్యావరణ అనుకూల & వ్యవసాయ సేవలు",
+      products_label: "మా ఉత్పత్తులు",
+      products_title: "రైతుల కోసం మేలైన వ్యవసాయ ఉత్పత్తులు",
+      knowledge_label: "రైతు విజ్ఞాన కేంద్రం",
+      knowledge_title: "నిపుణుల వ్యవసాయ సలహాలు & మార్గదర్శకాలు",
+      knowledge_refresh: "మరిన్ని కథనాలు చూడండి →",
+      weather_label: "ప్రత్యక్ష వాతావరణం",
+      weather_title: "వ్యవసాయ వాతావరణ సమాచారం & సలహాలు",
+      weather_search_btn: "వాతావరణం తెలుసుకోండి",
+      weather_humidity: "తేమ",
+      weather_wind: "గాలి వేగం",
+      weather_rain: "వర్షపాతం",
+      weather_condition: "వాతావరణ పరిస్థితి",
+      weather_advisories_heading: "రైతులకు నిపుణుల వ్యవసాయ సలహాలు",
+      testimonials_label: "రైతుల అనుభవాలు",
+      testimonials_title: "మా సేవలపై రైతులు ఏమంటున్నారు",
+      partners_label: "విశ్వసనీయ భాగస్వాములు",
+      partners_title: "ప్రముఖ బ్రాండ్లతో మెరుగైన వ్యవసాయం",
+      contact_label: "సంప్రదించండి",
+      contact_title: "మా వ్యవసాయ నిపుణుల బృందాన్ని సంప్రదించండి",
+      contact_desc: "ఉత్పత్తులు, సేవలు లేదా భాగస్వామ్యం గురించి సందేహాలు ఉన్నాయా? మీకు సహాయం చేయడానికి మా నిపుణులు సిద్ధంగా ఉన్నారు.",
+      contact_form_title: "సందేశం పంపండి",
+      form_name: "మీ పేరు *",
+      form_phone: "ఫోన్ నంబర్ *",
+      form_village: "గ్రామం / మండలం / ప్రాంతం",
+      form_crop: "ప్రధాన పంట",
+      form_message: "సందేశం లేదా ప్రశ్న",
+      form_submit: "సందేశం పంపండి",
+      btn_whatsapp: "📱 వాట్సాప్",
+      btn_callback: "📞 కాల్‌బ్యాక్",
+      order_whatsapp: "వాట్సాప్ ద్వారా ఆర్డర్ చేయండి",
+      request_callback: "కాల్‌బ్యాక్ కోరండి"
+    }
+  };
+
+  let currentLang = localStorage.getItem('gp_language') || 'en';
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem('gp_language', lang);
+    const dict = I18N[lang] || I18N.en;
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (dict[key]) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = dict[key];
+        } else {
+          el.textContent = dict[key];
+        }
+      }
+    });
+
+    const langLabel = document.getElementById('currentLangLabel');
+    if (langLabel) {
+      langLabel.textContent = lang === 'en' ? 'తెలుగు' : 'English';
+    }
+  }
+
+  function toggleLanguage() {
+    applyLanguage(currentLang === 'en' ? 'te' : 'en');
+    showToast(currentLang === 'te' ? 'భాష తెలుగులోకి మార్చబడింది' : 'Language changed to English', 'info');
+  }
+
+  /* ═══════════════════════════════════════════
+     TOAST NOTIFICATIONS
+  ═══════════════════════════════════════════ */
+  function showToast(message, type = 'info') {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    const bgMap = {
+      success: 'linear-gradient(135deg, #10b981, #059669)',
+      error: 'linear-gradient(135deg, #ef4444, #dc2626)',
+      info: 'linear-gradient(135deg, #3b82f6, #1d4ed8)',
+      warning: 'linear-gradient(135deg, #f59e0b, #d97706)'
+    };
+    const iconMap = { success: '✅', error: '⚠️', info: 'ℹ️', warning: '⚡' };
+    
+    toast.style.cssText = `
+      background: ${bgMap[type] || bgMap.info};
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
+      animation: fadeInSlide 0.3s cubic-bezier(0.16,1,0.3,1) forwards;
+      min-width: 260px;
+      max-width: 380px;
+    `;
+    toast.innerHTML = `<span>${iconMap[type]||'ℹ️'}</span><span>${message}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateY(10px)';
+      toast.style.transition = 'all 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 4000);
+  }
+
+  /* ═══════════════════════════════════════════
+     API CLIENT HELPER
+  ═══════════════════════════════════════════ */
+  async function apiFetch(path, options = {}) {
+    const token = localStorage.getItem('gp_farmer_token');
+    const headers = {
+      'Content-Type': 'application/json',
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {}),
+      ...(options.headers || {})
+    };
+
+    try {
+      const res = await fetch(BACKEND_URL + path, { ...options, headers });
+      const contentType = res.headers.get('content-type');
+      let data = null;
+      if (contentType && contentType.includes('application/json')) {
+        data = await res.json();
+      }
+      if (!res.ok) {
+        const errorMsg = data && data.detail ? data.detail : `HTTP ${res.status}`;
+        return { error: true, status: res.status, message: errorMsg };
+      }
+      return data;
+    } catch (err) {
+      console.warn(`API call failed [${path}]:`, err.message);
+      return { error: true, message: err.message, networkError: true };
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     FARMER AUTH & PROFILE SYSTEM
+  ═══════════════════════════════════════════ */
+  let currentFarmer = null;
+
+  async function checkFarmerSession() {
+    const token = localStorage.getItem('gp_farmer_token');
+    const container = document.getElementById('farmerNavContainer');
+    if (!token) {
+      currentFarmer = null;
+      renderFarmerNav(null);
+      return;
+    }
+
+    const me = await apiFetch('/auth/me');
+    if (me && !me.error) {
+      currentFarmer = me;
+      localStorage.setItem('gp_farmer_user', JSON.stringify(me));
+      renderFarmerNav(me);
+    } else {
+      localStorage.removeItem('gp_farmer_token');
+      localStorage.removeItem('gp_farmer_user');
+      currentFarmer = null;
+      renderFarmerNav(null);
+    }
+  }
+
+  function renderFarmerNav(farmer) {
+    const container = document.getElementById('farmerNavContainer');
+    if (!container) return;
+
+    if (farmer) {
+      const firstName = farmer.name ? farmer.name.split(' ')[0] : 'Farmer';
+      container.innerHTML = `
+        <div style="display:flex; align-items:center; gap:8px;">
+          <button class="farmer-auth-btn logged-in" onclick="openFarmerProfile()" title="View Farmer Profile" style="background:rgba(108,198,68,0.18); border-color:var(--green-bright); color:var(--white);">
+            <span>👨‍🌾</span> <span>${firstName}</span>
+          </button>
+          <button onclick="handleFarmerLogout()" title="Logout" style="background:none; border:none; color:rgba(255,255,255,0.6); cursor:pointer; font-size:16px; padding:4px 6px;">🚪</button>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <button class="farmer-auth-btn" onclick="openFarmerAuth('login')">
+          <span>👨‍🌾</span> <span data-i18n="nav_farmer_login">${I18N[currentLang]?.nav_farmer_login || 'Farmer Login'}</span>
+        </button>
+      `;
+    }
+  }
+
+  function openFarmerAuth(mode = 'login') {
+    const modal = document.getElementById('farmerAuthModal');
+    if (!modal) return;
+    switchFarmerAuthTab(mode);
+    modal.style.display = 'flex';
+  }
+
+  function closeFarmerAuth() {
+    const modal = document.getElementById('farmerAuthModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  function switchFarmerAuthTab(tab) {
+    const loginForm = document.getElementById('farmerLoginForm');
+    const regForm = document.getElementById('farmerRegisterForm');
+    const tabLogin = document.getElementById('authTabLogin');
+    const tabReg = document.getElementById('authTabRegister');
+    const title = document.getElementById('farmerAuthTitle');
+
+    if (tab === 'register') {
+      loginForm.style.display = 'none';
+      regForm.style.display = 'block';
+      tabLogin.classList.remove('active');
+      tabLogin.style.borderBottomColor = 'transparent';
+      tabLogin.style.color = 'rgba(255,255,255,0.6)';
+      tabReg.classList.add('active');
+      tabReg.style.borderBottomColor = 'var(--green-bright)';
+      tabReg.style.color = 'var(--white)';
+      title.textContent = 'Register New Farmer';
+    } else {
+      loginForm.style.display = 'block';
+      regForm.style.display = 'none';
+      tabReg.classList.remove('active');
+      tabReg.style.borderBottomColor = 'transparent';
+      tabReg.style.color = 'rgba(255,255,255,0.6)';
+      tabLogin.classList.add('active');
+      tabLogin.style.borderBottomColor = 'var(--green-bright)';
+      tabLogin.style.color = 'var(--white)';
+      title.textContent = 'Farmer Portal Login';
+    }
+  }
+
+  function quickFillFarmerLogin() {
+    const userField = document.getElementById('loginPhoneOrEmail');
+    const passField = document.getElementById('loginPassword');
+    if (userField && passField) {
+      userField.value = '9876543210';
+      passField.value = 'Farmer@123';
+      showToast('Filled test farmer credentials', 'info');
+    }
+  }
+
+  async function handleFarmerLogin(e) {
+    e.preventDefault();
+    const btn = document.getElementById('farmerLoginSubmitBtn');
+    const phoneOrEmail = document.getElementById('loginPhoneOrEmail').value.trim();
+    const password = document.getElementById('loginPassword').value;
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Logging in...';
+
+    const res = await apiFetch('/auth/login', {
+      method: 'POST',
+      body: JSON.stringify({ email_or_phone: phoneOrEmail, password })
+    });
+
+    btn.disabled = false;
+    btn.innerHTML = 'Login to GreenPulse';
+
+    if (res && res.token) {
+      localStorage.setItem('gp_farmer_token', res.token);
+      localStorage.setItem('gp_farmer_user', JSON.stringify(res.user));
+      currentFarmer = res.user;
+      renderFarmerNav(res.user);
+      closeFarmerAuth();
+      showToast(`Welcome back, ${res.user.name}! 🌾`, 'success');
+    } else {
+      showToast(res.message || 'Login failed. Check credentials.', 'error');
+    }
+  }
+
+  async function handleFarmerRegister(e) {
+    e.preventDefault();
+    const btn = document.getElementById('farmerRegisterSubmitBtn');
+    const name = document.getElementById('regName').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const village = document.getElementById('regVillage').value.trim();
+    const state = document.getElementById('regState').value;
+    const crop = document.getElementById('regCrop').value.trim();
+    const password = document.getElementById('regPassword').value;
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Creating Account...';
+
+    const payload = {
+      name,
+      phone,
+      password,
+      village,
+      state,
+      crops: crop ? [crop] : []
+    };
+
+    const res = await apiFetch('/auth/register', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    btn.disabled = false;
+    btn.innerHTML = 'Create Free Farmer Account';
+
+    if (res && res.token) {
+      localStorage.setItem('gp_farmer_token', res.token);
+      localStorage.setItem('gp_farmer_user', JSON.stringify(res.user));
+      currentFarmer = res.user;
+      renderFarmerNav(res.user);
+      closeFarmerAuth();
+      showToast(`Account created successfully! Welcome ${res.user.name} 🌾`, 'success');
+    } else {
+      showToast(res.message || 'Registration failed.', 'error');
+    }
+  }
+
+  function openFarmerProfile() {
+    if (!currentFarmer) {
+      openFarmerAuth('login');
+      return;
+    }
+    const modal = document.getElementById('farmerProfileModal');
+    if (!modal) return;
+
+    document.getElementById('profileModalName').textContent = currentFarmer.name || 'Farmer';
+    document.getElementById('profName').value = currentFarmer.name || '';
+    document.getElementById('profPhone').value = currentFarmer.phone || currentFarmer.email || '';
+    document.getElementById('profVillage').value = currentFarmer.village || '';
+    document.getElementById('profState').value = currentFarmer.state || 'Andhra Pradesh';
+    document.getElementById('profLand').value = currentFarmer.land_size_acres || '';
+    document.getElementById('profCrops').value = (currentFarmer.crops || []).join(', ');
+
+    modal.style.display = 'flex';
+  }
+
+  function closeFarmerProfile() {
+    const modal = document.getElementById('farmerProfileModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  async function handleProfileUpdate(e) {
+    e.preventDefault();
+    const name = document.getElementById('profName').value.trim();
+    const village = document.getElementById('profVillage').value.trim();
+    const state = document.getElementById('profState').value.trim();
+    const land_size_acres = parseFloat(document.getElementById('profLand').value) || null;
+    const cropsRaw = document.getElementById('profCrops').value;
+    const crops = cropsRaw ? cropsRaw.split(',').map(s => s.trim()).filter(Boolean) : [];
+
+    const res = await apiFetch('/auth/me', {
+      method: 'PUT',
+      body: JSON.stringify({ name, village, state, land_size_acres, crops })
+    });
+
+    if (res && !res.error) {
+      currentFarmer = res;
+      localStorage.setItem('gp_farmer_user', JSON.stringify(res));
+      renderFarmerNav(res);
+      closeFarmerProfile();
+      showToast('Profile updated successfully! ✅', 'success');
+    } else {
+      showToast(res.message || 'Failed to update profile.', 'error');
+    }
+  }
+
+  function handleFarmerLogout() {
+    localStorage.removeItem('gp_farmer_token');
+    localStorage.removeItem('gp_farmer_user');
+    currentFarmer = null;
+    renderFarmerNav(null);
+    closeFarmerProfile();
+    showToast('You have been logged out.', 'info');
+  }
+
+  /* ═══════════════════════════════════════════
+     DYNAMIC DATA LOADERS (MONGODB TO FRONTEND)
+  ═══════════════════════════════════════════ */
+  let productsCache = [];
+  let currentProductCategory = 'all';
+
+  async function loadProducts(category = currentProductCategory, search = '') {
+    const grid = document.getElementById('productsGrid');
+    if (!grid) return;
+
+    let url = '/products?limit=24';
+    if (category && category !== 'all') url += `&category=${encodeURIComponent(category)}`;
+    if (search && search.trim()) url += `&search=${encodeURIComponent(search.trim())}`;
+
+    const data = await apiFetch(url);
+    if (!data || data.error || !Array.isArray(data.items)) {
+      // Keep static cards if backend is uncontactable
+      return;
+    }
+
+    productsCache = data.items;
+    if (productsCache.length === 0) {
+      grid.innerHTML = `
+        <div style="grid-column:1/-1; text-align:center; padding:48px 20px; color:rgba(255,255,255,0.6);">
+          <div style="font-size:40px; margin-bottom:12px;">🌾</div>
+          <h4 style="color:var(--white);">No products found</h4>
+          <p style="font-size:14px;">Try searching with a different term or select another category.</p>
+        </div>
+      `;
+      return;
+    }
+
+    grid.innerHTML = productsCache.map((p, idx) => {
+      const img = (p.images && p.images.length > 0) ? p.images[0] : 'https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?w=800&q=100&fit=crop';
+      const badgeHtml = p.badge ? `<span class="product-badge ${p.badge.toLowerCase().includes('new') ? 'new' : ''}">${p.badge}</span>` : '';
+      const priceHtml = p.price ? `<span style="font-size:16px; font-weight:700; color:var(--yellow);">₹${p.price.toLocaleString()}</span>` : '';
+
+      return `
+        <div class="product-card reveal visible" style="animation-delay:${idx * 0.05}s">
+          <div class="product-img-wrap" onclick="openProductDetail('${p._id || p.id}')" style="cursor:pointer;">
+            <img src="${img}" alt="${p.title}" loading="lazy">
+            ${badgeHtml}
+          </div>
+          <div class="product-info">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:4px;">
+              <div class="product-cat">${p.category}</div>
+              ${priceHtml}
+            </div>
+            <h4 onclick="openProductDetail('${p._id || p.id}')" style="cursor:pointer;">${p.title}</h4>
+            <p>${p.description || ''}</p>
+            <div class="product-footer">
+              <a href="#" class="btn-wa" onclick="event.preventDefault(); openWhatsApp('${p.title}')">${I18N[currentLang]?.btn_whatsapp || '📱 WhatsApp'}</a>
+              <button class="btn-inquiry" onclick="openInquiryModal('${p.title}', 'product')">${I18N[currentLang]?.btn_callback || '📞 Callback'}</button>
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  let productSearchTimer = null;
+  function handleProductSearch(val) {
+    clearTimeout(productSearchTimer);
+    productSearchTimer = setTimeout(() => {
+      loadProducts(currentProductCategory, val);
+    }, 350);
+  }
+
+  function filterProductsByCategory(cat) {
+    currentProductCategory = cat;
+    const filterContainer = document.getElementById('productCategoryFilter');
+    if (filterContainer) {
+      filterContainer.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.textContent.includes(cat) || (cat === 'all' && btn.textContent.includes('All'))) {
+          btn.classList.add('active');
+        }
+      });
+    }
+    const searchVal = document.getElementById('productSearchInput')?.value || '';
+    loadProducts(cat, searchVal);
+  }
+
+  async function loadServices() {
+    const grid = document.getElementById('servicesGrid');
+    if (!grid) return;
+
+    const data = await apiFetch('/services?limit=12');
+    if (!data || data.error || !Array.isArray(data.items) || data.items.length === 0) return;
+
+    grid.innerHTML = data.items.map((s, idx) => {
+      const img = s.image || 'https://images.unsplash.com/photo-1595974482597-4b8da8879bc5?auto=format&fit=crop&w=1200&q=85';
+      return `
+        <div class="service-card swiper-slide reveal visible" onclick="openServiceDetail('${s._id || s.id}')" style="cursor:pointer; transition-delay:${idx * 0.06}s">
+          <img src="${img}" alt="${s.name}" class="service-card-img" loading="lazy">
+          <div class="service-card-overlay">
+            <span class="service-tag">${s.tag || 'Expert Service'}</span>
+            <h3>${s.name}</h3>
+            <p>${s.description || ''}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    if (window.servicesSwiper) {
+      window.servicesSwiper.update();
+    }
+  }
+
+  async function loadPartners() {
+    const grid = document.getElementById('partnersGrid');
+    if (!grid) return;
+
+    const data = await apiFetch('/partners?limit=12');
+    if (!data || data.error || !Array.isArray(data.items) || data.items.length === 0) return;
+
+    grid.innerHTML = data.items.map((p, idx) => {
+      const img = p.logo || 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=500&q=85';
+      return `
+        <div class="partner-card-visual reveal visible" style="transition-delay:${idx * 0.07}s">
+          <img src="${img}" alt="${p.name}" loading="lazy">
+          <div class="partner-card-body">
+            <div class="partner-card-icon">🌱</div>
+            <h4>${p.name}</h4>
+            <p>${p.description || p.category || ''}</p>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  async function loadArticles() {
+    const grid = document.getElementById('articlesGrid');
+    if (!grid) return;
+
+    const data = await apiFetch('/articles?limit=5');
+    if (!data || data.error || !Array.isArray(data.items) || data.items.length === 0) return;
+
+    const featured = data.items[0];
+    const rest = data.items.slice(1);
+
+    const featHtml = featured ? `
+      <div class="article-card featured reveal visible" onclick="openArticleReader('${featured._id || featured.id}')" style="cursor:pointer;">
+        <img src="${featured.image || 'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1400&q=85'}" alt="${featured.title}" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">${featured.category || 'Featured Guide'}</span>
+          <h3>${featured.title}</h3>
+          <p>${featured.excerpt || (featured.content ? featured.content.substring(0, 140) + '...' : '')}</p>
+          <div class="article-meta">
+            <span>📅 ${new Date(featured.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+            <span>⏱ ${featured.read_time_mins || 6} min read</span>
+            <span>👁 ${featured.views || 0} views</span>
+          </div>
+        </div>
+      </div>
+    ` : '';
+
+    const restHtml = rest.map((a, idx) => `
+      <div class="article-card reveal visible" onclick="openArticleReader('${a._id || a.id}')" style="cursor:pointer; transition-delay:${(idx + 1) * 0.08}s">
+        <img src="${a.image || 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?auto=format&fit=crop&w=800&q=85'}" alt="${a.title}" class="article-img" loading="lazy">
+        <div class="article-body">
+          <span class="article-tag">${a.category || 'Agronomy Guide'}</span>
+          <h3>${a.title}</h3>
+          <p>${a.excerpt || (a.content ? a.content.substring(0, 100) + '...' : '')}</p>
+          <div class="article-meta">
+            <span>📅 ${new Date(a.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+            <span>⏱ ${a.read_time_mins || 5} min read</span>
+            <span>👁 ${a.views || 0}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+
+    grid.innerHTML = featHtml + restHtml;
+  }
+
+  async function loadPublicSettings() {
+    const settings = await apiFetch('/admin/public-settings');
+    if (!settings || settings.error) return;
+
+    if (settings.phone) {
+      const p = document.getElementById('contactPhoneDisplay');
+      if (p) p.textContent = settings.phone;
+    }
+    if (settings.email) {
+      const e = document.getElementById('contactEmailDisplay');
+      if (e) e.textContent = settings.email;
+    }
+    if (settings.whatsapp) {
+      window.GREENPULSE_WA_NUMBER = settings.whatsapp;
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     INTERACTIVE DETAIL MODALS
+  ═══════════════════════════════════════════ */
+  async function openProductDetail(id) {
+    const modal = document.getElementById('productDetailModal');
+    if (!modal) return;
+
+    const p = await apiFetch(`/products/${id}`);
+    if (!p || p.error) {
+      showToast('Could not load product details.', 'error');
+      return;
+    }
+
+    document.getElementById('productModalCategory').textContent = p.category || 'Product';
+    document.getElementById('productModalTitle').textContent = p.title;
+    document.getElementById('productModalPrice').textContent = p.price ? `₹${p.price.toLocaleString()}` : 'Contact for Price';
+    document.getElementById('productModalDesc').textContent = p.description || '';
+    document.getElementById('productModalDetails').textContent = p.details || p.description || 'Verified GreenPulse Quality Assured.';
+    
+    const imgEl = document.getElementById('productModalImage');
+    const imgSrc = (p.images && p.images.length > 0) ? p.images[0] : 'https://images.unsplash.com/photo-1585314062340-f1a5a7c9328d?w=800&q=100&fit=crop';
+    imgEl.src = imgSrc;
+
+    document.getElementById('productModalWaBtn').onclick = () => openWhatsApp(p.title);
+    document.getElementById('productModalInquiryBtn').onclick = () => {
+      closeProductDetail();
+      openInquiryModal(p.title, 'product');
+    };
+
+    modal.style.display = 'flex';
+  }
+
+  function closeProductDetail() {
+    const modal = document.getElementById('productDetailModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  async function openServiceDetail(id) {
+    const modal = document.getElementById('serviceDetailModal');
+    if (!modal) return;
+
+    const s = await apiFetch(`/services/${id}`);
+    if (!s || s.error) {
+      showToast('Could not load service details.', 'error');
+      return;
+    }
+
+    document.getElementById('serviceModalTag').textContent = s.tag || 'Agriculture Service';
+    document.getElementById('serviceModalTitle').textContent = s.name;
+    document.getElementById('serviceModalDesc').textContent = s.description || '';
+    document.getElementById('serviceModalDetails').textContent = s.details || 'Dedicated agronomist consultation with tailored advice for your specific soil and crop.';
+    
+    const imgEl = document.getElementById('serviceModalImage');
+    imgEl.src = s.image || 'https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=1200&q=100&fit=crop';
+
+    document.getElementById('serviceModalWaBtn').onclick = () => openWhatsApp(`Service: ${s.name}`);
+    document.getElementById('serviceModalInquiryBtn').onclick = () => {
+      closeServiceDetail();
+      openInquiryModal(`Service: ${s.name}`, 'service');
+    };
+
+    modal.style.display = 'flex';
+  }
+
+  function closeServiceDetail() {
+    const modal = document.getElementById('serviceDetailModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  async function openArticleReader(id) {
+    const modal = document.getElementById('articleReaderModal');
+    if (!modal) return;
+
+    const a = await apiFetch(`/articles/${id}`);
+    if (!a || a.error) {
+      showToast('Could not load article.', 'error');
+      return;
+    }
+
+    document.getElementById('articleReaderTag').textContent = a.category || 'Knowledge Center';
+    document.getElementById('articleReaderTitle').textContent = a.title;
+    document.getElementById('articleReaderDate').textContent = `📅 ${new Date(a.created_at || Date.now()).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}`;
+    document.getElementById('articleReaderAuthor').textContent = `✍️ ${a.author || 'Agronomist'}`;
+    document.getElementById('articleReaderTime').textContent = `⏱ ${a.read_time_mins || 6} min read`;
+    document.getElementById('articleReaderViews').textContent = `👁 ${a.views || 0} views`;
+    document.getElementById('articleReaderImage').src = a.image || 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1400&q=100&fit=crop';
+    document.getElementById('articleReaderContent').innerHTML = (a.content || a.excerpt || '')
+      .split('\n\n')
+      .map(p => `<p style="margin-bottom:14px;">${p}</p>`)
+      .join('');
+
+    modal.style.display = 'flex';
+  }
+
+  function closeArticleReader() {
+    const modal = document.getElementById('articleReaderModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  /* ═══════════════════════════════════════════
+     INQUIRY / CALLBACK MODAL & SUBMISSION
+  ═══════════════════════════════════════════ */
+  function openInquiryModal(subject = 'General Callback', type = 'inquiry') {
+    const modal = document.getElementById('inquiryModal');
+    if (!modal) return;
+
+    document.getElementById('inquirySubject').value = subject;
+    document.getElementById('inquiryType').value = type;
+    document.getElementById('inquiryModalHeading').textContent = `Callback for ${subject}`;
+    
+    if (currentFarmer) {
+      document.getElementById('inquiryName').value = currentFarmer.name || '';
+      document.getElementById('inquiryPhone').value = currentFarmer.phone || '';
+      document.getElementById('inquiryVillage').value = currentFarmer.village || '';
+    }
+
+    modal.style.display = 'flex';
+  }
+
+  function closeInquiryModal() {
+    const modal = document.getElementById('inquiryModal');
+    if (modal) modal.style.display = 'none';
+  }
+
+  async function handleInquirySubmit(e) {
+    e.preventDefault();
+    const btn = document.getElementById('inquirySubmitBtn');
+    const name = document.getElementById('inquiryName').value.trim();
+    const phone = document.getElementById('inquiryPhone').value.trim();
+    const village = document.getElementById('inquiryVillage').value.trim();
+    const notes = document.getElementById('inquiryNotes').value.trim();
+    const subject = document.getElementById('inquirySubject').value || 'Callback';
+    const type = document.getElementById('inquiryType').value || 'callback';
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Submitting...';
+
+    const payload = {
+      name,
+      phone,
+      village,
+      message: `Inquiry regarding: ${subject}. Notes: ${notes}`,
+      type,
+      source: 'modal_callback'
+    };
+
+    const res = await apiFetch('/leads', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    btn.disabled = false;
+    btn.innerHTML = 'Confirm Callback Request';
+
+    if (res && res.id) {
+      closeInquiryModal();
+      showToast('Callback booked! Our agronomist will call you shortly. 📞', 'success');
+    } else {
+      showToast('Inquiry recorded! Thank you.', 'info');
+      closeInquiryModal();
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     LIVE WEATHER & VILLAGE SEARCH SYSTEM
+  ═══════════════════════════════════════════ */
+  async function fetchWeatherForLocation(lat, lon, city = 'Guntur') {
+    const locNameEl = document.getElementById('weatherLocationName');
+    if (locNameEl) locNameEl.innerHTML = `📍 ${city} (Updating...)`;
+
+    const data = await apiFetch(`/weather?lat=${lat}&lon=${lon}&city=${encodeURIComponent(city)}`);
+    if (!data || data.error) {
+      if (locNameEl) locNameEl.innerHTML = `📍 ${city}`;
+      return;
+    }
+
+    const c = data.current;
+    if (locNameEl) locNameEl.innerHTML = `📍 ${city}, ${data.state || 'AP/Telangana'}`;
+
+    const tempEl = document.getElementById('weatherCurrentTemp');
+    if (tempEl) tempEl.innerHTML = `${Math.round(c.temperature)}<sup>°C</sup>`;
+
+    const descEl = document.getElementById('weatherCurrentDesc');
+    if (descEl) descEl.textContent = `${c.icon} ${c.weather} — Good for agricultural fieldwork`;
+
+    const humEl = document.getElementById('weatherHumidity');
+    if (humEl) humEl.textContent = `${c.humidity}%`;
+
+    const windEl = document.getElementById('weatherWind');
+    if (windEl) windEl.textContent = `${c.wind_speed} km/h`;
+
+    const rainEl = document.getElementById('weatherRain');
+    if (rainEl) rainEl.textContent = `${c.precipitation || 0} mm`;
+
+    const condEl = document.getElementById('weatherCondition');
+    if (condEl) condEl.textContent = c.weather;
+
+    // Daily Forecast
+    const forecastWrap = document.getElementById('weatherForecastContainer');
+    if (forecastWrap && Array.isArray(data.forecast)) {
+      const days = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+      forecastWrap.innerHTML = data.forecast.slice(0, 4).map((f, i) => {
+        const d = new Date(f.date);
+        const dayName = days[d.getDay()];
+        return `
+          <div class="weather-day-card ${i===0 ? 'today':''} reveal visible" style="transition-delay:${(i+1)*0.08}s">
+            <div class="weather-day">${dayName}</div>
+            <div class="weather-icon">${f.icon}</div>
+            <div class="weather-day-temp">${Math.round(f.temp_max)}°</div>
+            <div class="weather-day-low">${Math.round(f.temp_min)}° low</div>
+            <div class="weather-rain">💧 ${f.rain_prob}%</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Dynamic Agricultural Advisories
+    const advContainer = document.getElementById('weatherAdvisoriesContainer');
+    const advList = document.getElementById('weatherAdvisoriesList');
+    if (advContainer && advList && Array.isArray(data.agricultural_advisories) && data.agricultural_advisories.length > 0) {
+      advList.innerHTML = data.agricultural_advisories.map(a => {
+        const msg = currentLang === 'te' && a.message_te ? a.message_te : a.message;
+        const icon = a.type === 'spraying' ? '🚜' : (a.type === 'irrigation' ? '💧' : '🌾');
+        const color = a.status === 'good' ? '#10b981' : (a.status === 'warning' ? '#f59e0b' : '#3b82f6');
+        return `
+          <div style="background:rgba(255,255,255,0.05); border-left:4px solid ${color}; padding:10px 14px; border-radius:6px;">
+            <div style="font-weight:600; font-size:13px; color:${color}; margin-bottom:4px;">${icon} ${a.type.toUpperCase()}</div>
+            <div style="font-size:13px; color:rgba(255,255,255,0.85); line-height:1.4;">${msg}</div>
+          </div>
+        `;
+      }).join('');
+      advContainer.style.display = 'block';
+    }
+  }
+
+  async function searchWeatherByVillage() {
+    const input = document.getElementById('weatherVillageInput');
+    const query = input?.value?.trim();
+    if (!query) {
+      showToast('Please enter a village, mandal or district name.', 'info');
+      return;
+    }
+
+    const results = await apiFetch(`/weather/search?query=${encodeURIComponent(query)}`);
+    if (results && Array.isArray(results) && results.length > 0) {
+      const match = results[0];
+      showToast(`Found: ${match.name}, ${match.district}`, 'success');
+      await fetchWeatherForLocation(match.lat, match.lon, match.name);
+    } else {
+      showToast(`No weather station found for "${query}". Checking Open-Meteo...`, 'info');
+      await fetchWeatherForLocation(16.3067, 80.4365, query);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     CONTACT FORM SUBMISSION
+  ═══════════════════════════════════════════ */
+  async function submitForm(e) {
+    e.preventDefault();
+    const btn = document.getElementById('contactSubmitBtn');
+    
+    // Honeypot check (catches automated spam bots)
+    const hp = document.getElementById('contactHp')?.value;
+    if (hp) {
+      btn.innerHTML = '✅ Message Sent! We\'ll contact you soon.';
+      return;
+    }
+
+    const name = document.getElementById('contactName')?.value?.trim();
+    const phone = document.getElementById('contactPhone')?.value?.trim();
+    const village = document.getElementById('contactVillage')?.value?.trim();
+    const crop = document.getElementById('contactCrop')?.value;
+    const message = document.getElementById('contactMessage')?.value?.trim();
+
+    if (!name || !phone) {
+      showToast('Please enter your name and phone number.', 'error');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '⏳ Sending...';
+
+    const payload = {
+      name,
+      phone,
+      village,
+      crop,
+      message,
+      type: 'contact',
+      source: 'homepage_contact_form'
+    };
+
+    const res = await apiFetch('/leads', {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+
+    btn.disabled = false;
+    btn.innerHTML = 'Send Message <span class="btn-icon">→</span>';
+
+    if (res && res.id) {
+      showToast('Message sent! Our agronomist team will call you soon. ✅', 'success');
+      document.getElementById('contactName').value = '';
+      document.getElementById('contactPhone').value = '';
+      document.getElementById('contactVillage').value = '';
+      document.getElementById('contactMessage').value = '';
+    } else {
+      showToast(res.message || 'Thank you! We received your request.', 'success');
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     WHATSAPP INTEGRATION
+  ═══════════════════════════════════════════ */
+  function openWhatsApp(topic = 'General Inquiry') {
+    const phone = window.GREENPULSE_WA_NUMBER || '919876543210';
+    const farmerName = currentFarmer ? currentFarmer.name : '';
+    const farmerVillage = currentFarmer ? currentFarmer.village : '';
+
+    const msg = encodeURIComponent(
+      `Hello GreenPulse Team,\n\nI need assistance regarding: *${topic}*\n` +
+      (farmerName ? `Name: ${farmerName}\n` : '') +
+      (farmerVillage ? `Village: ${farmerVillage}\n` : '') +
+      `\nPlease guide me. Thank you!`
+    );
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE NAVIGATION DRAWER
+  ═══════════════════════════════════════════ */
+  function toggleMobileNav() {
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks) {
+      navLinks.classList.toggle('active');
+    }
+  }
+
+  function scrollGrid(gridId, offset) {
+    const grid = document.getElementById(gridId);
+    if (grid) grid.scrollBy({ left: offset, behavior: 'smooth' });
+  }
+
+  /* ═══════════════════════════════════════════
+     SCROLL & OBSERVERS
+  ═══════════════════════════════════════════ */
+  window.addEventListener('scroll', () => {
+    const navbar = document.getElementById('navbar');
+    if (navbar) {
+      if (window.scrollY > 60) navbar.classList.add('scrolled');
+      else navbar.classList.remove('scrolled');
+    }
+
+    const sections = document.querySelectorAll('section[id]');
+    let cur = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) cur = s.id;
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => {
+      a.classList.remove('active');
+      if (a.getAttribute('href') === '#' + cur || (cur === 'home' && a.getAttribute('href') === '#')) {
+        a.classList.add('active');
+      }
+    });
+  });
+
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ═══════════════════════════════════════════
+     LIBRARY INITIALIZERS (PhotoSwipe, Swiper, GSAP, LazyLoad)
+  ═══════════════════════════════════════════ */
+  let pswpLightbox = null;
+  function initPhotoSwipe() {
+    try {
+      if (typeof PhotoSwipeLightbox !== 'undefined' && typeof PhotoSwipe !== 'undefined') {
+        pswpLightbox = new PhotoSwipeLightbox({
+          gallery: '#galleryGrid',
+          children: 'a.gallery-item',
+          pswpModule: PhotoSwipe,
+          bgOpacity: 0.94,
+          wheelToZoom: true,
+          showHideAnimationType: 'zoom'
+        });
+        pswpLightbox.init();
+      }
+    } catch (err) {
+      console.warn('PhotoSwipe init:', err.message);
+    }
+  }
+
+  let servicesSwiper = null;
+  function initServicesSwiper() {
+    try {
+      if (typeof Swiper !== 'undefined') {
+        servicesSwiper = new Swiper('.services-swiper', {
+          slidesPerView: 1.15,
+          spaceBetween: 20,
+          grabCursor: true,
+          navigation: {
+            nextEl: '#servicesNextBtn',
+            prevEl: '#servicesPrevBtn'
+          },
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          },
+          breakpoints: {
+            640: { slidesPerView: 2.15, spaceBetween: 20 },
+            1024: { slidesPerView: 3.15, spaceBetween: 24 },
+            1280: { slidesPerView: 4, spaceBetween: 24 }
+          }
+        });
+        window.servicesSwiper = servicesSwiper;
+      }
+    } catch (err) {
+      console.warn('Swiper init:', err.message);
+    }
+  }
+
+  let lazyLoadInstance = null;
+  function initLazyLoad() {
+    try {
+      if (typeof LazyLoad !== 'undefined') {
+        lazyLoadInstance = new LazyLoad({
+          elements_selector: ".lazy, img[loading='lazy']",
+          threshold: 300
+        });
+        window.lazyLoadInstance = lazyLoadInstance;
+      }
+    } catch (err) {
+      console.warn('LazyLoad init:', err.message);
+    }
+  }
+
+  function initGSAPAnimations() {
+    try {
+      if (typeof gsap === 'undefined') return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      if (typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Subtle hero parallax on scroll
+        gsap.to('.hero-slide.active .hero-slide-bg', {
+          yPercent: 12,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: '.hero',
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 0.4
+          }
+        });
+
+        // Staggered reveal of section headers
+        gsap.utils.toArray('.section-header.reveal').forEach(el => {
+          gsap.fromTo(el,
+            { y: 30, opacity: 0 },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: 'power2.out',
+              scrollTrigger: {
+                trigger: el,
+                start: 'top 88%',
+                toggleActions: 'play none none none'
+              }
+            }
+          );
+        });
+      }
+    } catch (err) {
+      console.warn('GSAP init:', err.message);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     INITIALIZATION ON PAGE LOAD
+  ═══════════════════════════════════════════ */
+  window.addEventListener('DOMContentLoaded', () => {
+    applyLanguage(currentLang);
+    checkFarmerSession();
+    fetchWeatherForLocation(16.3067, 80.4365, 'Guntur');
+    loadProducts();
+    loadServices();
+    loadPartners();
+    loadArticles();
+    loadPublicSettings();
+
+    // Modern Visual Upgrades
+    initPhotoSwipe();
+    initServicesSwiper();
+    initLazyLoad();
+    initGSAPAnimations();
+  });
+</script>
+</body>
+</html>

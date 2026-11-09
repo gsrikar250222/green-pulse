@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+venv/
+env/
+.venv/
+ENV/
+.pytest_cache/
+
+# Environment
+.env
+*.env
+!.env.example
+
+# MongoDB
+*.mongodb
+
+# Node (if needed)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Cloudinary uploads temp
+uploads/tmp/
