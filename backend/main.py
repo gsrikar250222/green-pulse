@@ -144,6 +144,23 @@ async def favicon():
         media_type="image/svg+xml"
     )
 
+@app.get("/api/debug-files", include_in_schema=False)
+async def debug_files():
+    cur = os.path.abspath(".")
+    files_cur = os.listdir(".") if os.path.exists(".") else []
+    parent = os.path.abspath("..")
+    files_parent = os.listdir("..") if os.path.exists("..") else []
+    file_dir = os.path.dirname(os.path.abspath(__file__))
+    files_file_dir = os.listdir(file_dir) if os.path.exists(file_dir) else []
+    return {
+        "cwd": cur,
+        "files_cur": files_cur,
+        "parent": parent,
+        "files_parent": files_parent,
+        "file_dir": file_dir,
+        "files_file_dir": files_file_dir,
+    }
+
 @app.get("/api", tags=["Health"])
 @app.get("/api/info", tags=["Health"])
 async def api_info():
