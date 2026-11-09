@@ -25,3 +25,4 @@ services:
         sync: false
       - key: ENVIRONMENT
         value: production
+

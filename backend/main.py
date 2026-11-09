@@ -595,6 +595,8 @@ if frontend_dir:
     from fastapi.responses import FileResponse
 
     @app.get("/", include_in_schema=False)
+    @app.get("/index.html", include_in_schema=False)
+    @app.get("/frontend/index.html", include_in_schema=False)
     async def serve_index(request: Request):
         if "application/json" in request.headers.get("accept", "") and "text/html" not in request.headers.get("accept", ""):
             return {
@@ -607,6 +609,8 @@ if frontend_dir:
         return FileResponse(os.path.join(frontend_dir, "index.html"))
 
     @app.get("/admin", include_in_schema=False)
+    @app.get("/admin.html", include_in_schema=False)
+    @app.get("/frontend/admin.html", include_in_schema=False)
     async def serve_admin():
         return FileResponse(os.path.join(frontend_dir, "admin.html"))
 
